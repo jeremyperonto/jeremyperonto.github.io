@@ -1,3 +1,40 @@
+<!--
+SKILL PAGE TEMPLATE — copy this pattern for each released Claude skill.
+The body below is the shipped Walk the Store page, kept as the live worked
+example. To release a new skill: cp to /<skill-slug>/index.html, replace the
+skill-specific content section by section, then run the checklist.
+
+Sections, in order (field-tested — keep all, keep the order):
+ 1. topbar — back-link + [x] human / [ ] machine toggle
+ 2. hero — eyebrow "Free Claude skill · no coding required", H1, lede,
+    CTA row (primary → #install, ghost → GitHub; never GitHub-first)
+ 3. Who this is for — 4 cards, one audience each
+ 4. The idea — origin story, 2–3 short paragraphs, Jeremy's voice
+ 5. What you get — sample output in a .finding card (work-order format)
+ 6. What you need — Claude account (link the skills help article), time,
+    Claude in Chrome (linked) with the no-extension fallback stated
+ 7. Set it up — claude.ai FIRST, numbered steps, SITE-HOSTED ready zip;
+    Claude Code second, tagged "for developers", product link
+ 8. Use it — copyable prompts (lead with the target audience's own case)
+ 9. Send it to an agent — textarea + optional credit name; GitHub issue
+    prefill + copy-as-agent-prompt buttons; email fallback in the note
+10. Changelog — mirrors the repo history; feature entries get the accent
+    chip; shipped user requests are credited here
+11. Posture line — tool disclaimer; describes Jeremy by the breadth of the
+    work, never as "the human version of X"
+12. footer — github / MIT / jeremyperonto.com / cognicard cross-link
+    Machine view mirrors ALL content as markdown, agent safety note first.
+
+Checklist per release:
+- [ ] Build the zip: cd ~/Developer/<skill-repo> && zip -qr /tmp/<slug>-skill.zip <skill-folder> -x "*.DS_Store" → copy into the page folder
+- [ ] curl-verify every external link (claude.ai URLs 403 to curl — link claude.com equivalents)
+- [ ] Meta: title, description, canonical, OG, twitter; no analytics snippet
+- [ ] sitemap.xml entry, lastmod today
+- [ ] Homepage work-item points at /<slug>/, not GitHub
+- [ ] Machine view matches human content; copy button works
+- [ ] Voice audit per memory/user_writing_voice.md (no "not X, it's Y", no hype vocab, no over-bolding)
+- [ ] Walk the page as the least-technical target persona before shipping
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
