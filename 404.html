@@ -3,16 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — Jeremy Peronto</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0c'/%3E%3Ctext x='16' y='22' font-family='system-ui,-apple-system,sans-serif' font-size='16' font-weight='600' fill='%23c5f02f' text-anchor='middle'%3EJP%3C/text%3E%3C/svg%3E">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<title>404 — Undeliverable · Jeremy Peronto</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f6f2ea">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f6f2ea'/%3E%3Ctext x='16' y='22' font-family='system-ui,-apple-system,sans-serif' font-size='16' font-weight='700' fill='%230f766e' text-anchor='middle'%3EJP%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0a0c;
-    --border: #222228;
-    --text-primary: #e8e6e3;
-    --text-secondary: #7a7880;
-    --accent: #c5f02f;
+    --bg: #f6f2ea;
+    --surface: #fffdf8;
+    --border: #e7e0d3;
+    --text-primary: #201d18;
+    --text-secondary: #5b544a;
+    --text-muted: #938a7c;
+    --accent: #0f766e;
+    --accent-strong: #0c5f58;
+    --on-accent: #fffdf8;
+    --fail: #c0392b;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,91 +30,185 @@
     font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+    -webkit-font-smoothing: antialiased;
   }
 
+  /* Subtle paper grain */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
   }
-
-  .glow {
-    position: fixed;
-    width: 600px;
-    height: 600px;
-    border-radius: 50%;
-    filter: blur(180px);
-    opacity: 0.04;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .glow-1 { background: var(--accent); top: -200px; right: -100px; }
-  .glow-2 { background: #5865F2; bottom: -200px; left: -100px; }
 
   .content {
     position: relative;
     z-index: 1;
     text-align: center;
-    padding: 0 24px;
+    padding: 40px 24px;
+    max-width: 460px;
+    width: 100%;
     opacity: 0;
     animation: fadeUp 0.6s ease forwards 0.1s;
   }
 
-  .code {
+  /* Delivery route: a package that can't reach its stop */
+  .route {
+    position: relative;
+    width: 230px;
+    height: 30px;
+    margin: 0 auto 22px;
+  }
+  .route .line {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    right: 22px;
+    border-top: 2px dashed var(--border);
+  }
+  .route .stop {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 6rem;
+    font-weight: 600;
+    color: var(--fail);
+    font-size: 1.1rem;
+  }
+  .route .pkg {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    font-size: 1.15rem;
+    animation: deliver 2.6s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.3s;
+  }
+  @keyframes deliver {
+    0%   { left: 0; }
+    68%  { left: calc(100% - 46px); }
+    76%  { left: calc(100% - 54px); }   /* bumps the wall */
+    82%  { left: calc(100% - 48px); }
+    100% { left: calc(100% - 50px); }
+  }
+
+  .code {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 5.5rem;
     font-weight: 700;
-    letter-spacing: -2px;
+    letter-spacing: -0.04em;
     color: var(--accent);
     line-height: 1;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
   }
 
-  .message {
+  .headline {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
   }
 
-  a {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 10px 24px;
+  /* Tracking readout card */
+  .track {
+    text-align: left;
+    background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    margin-bottom: 28px;
   }
+  .track .row { display: flex; gap: 12px; }
+  .track .k { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; min-width: 72px; flex-shrink: 0; }
+  .track .v { color: var(--text-primary); word-break: break-all; }
+  .track .v.fail { color: var(--fail); }
+  .track .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--fail); margin-right: 6px; vertical-align: 1px; animation: pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-  a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+  .actions { display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 22px;
+    border-radius: 9px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
+  .cta:hover { background: var(--accent-strong); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(15, 118, 110, 0.22); }
+  .cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .cta .arrow { transition: transform 0.2s ease; }
+  .cta:hover .arrow { transform: translateX(3px); }
+  .secondary {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .secondary:hover { color: var(--accent); border-color: var(--accent); }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .content { opacity: 1 !important; animation: none; }
+    .route .pkg { animation: none; left: calc(100% - 50px); }
+    .track .dot { animation: none; }
+  }
+
+  @media (max-width: 480px) {
+    .code { font-size: 4.5rem; }
+  }
 </style>
 </head>
 <body>
-  <div class="glow glow-1"></div>
-  <div class="glow glow-2"></div>
   <div class="content">
+    <div class="route" aria-hidden="true">
+      <div class="line"></div>
+      <span class="pkg">📦</span>
+      <span class="stop">✕</span>
+    </div>
+
     <div class="code">404</div>
-    <p class="message">Nothing here.</p>
-    <a href="/">Back home</a>
+    <p class="headline">This one didn't make the last mile.</p>
+
+    <div class="track">
+      <div class="row"><span class="k">Tracking</span><span class="v" id="path">/unknown</span></div>
+      <div class="row"><span class="k">Status</span><span class="v fail"><span class="dot"></span>Undeliverable</span></div>
+      <div class="row"><span class="k">Reason</span><span class="v">No such address at this warehouse</span></div>
+    </div>
+
+    <div class="actions">
+      <a class="cta" href="/">Return to sender <span class="arrow">→</span></a>
+      <a class="secondary" href="/resume/">or grab my résumé</a>
+    </div>
   </div>
+
+  <script>
+    // Show the path the visitor actually tried to reach.
+    var p = location.pathname;
+    document.getElementById('path').textContent = (p && p !== '/') ? p : '/unknown';
+  </script>
 </body>
 </html>
