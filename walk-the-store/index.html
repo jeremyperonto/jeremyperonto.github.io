@@ -36,9 +36,6 @@
     --on-accent: #fffdf8;
     --chip-bg: rgba(15, 118, 110, 0.10);
     --chip-text: #0f766e;
-    --machine-bg: #14120e;
-    --machine-text: #e8e2d4;
-    --machine-dim: #9a917f;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text-primary); font-family: 'DM Sans', sans-serif; line-height: 1.65; }
@@ -108,18 +105,15 @@
   footer a { color: var(--text-secondary); text-decoration: none; }
   footer a:hover { color: var(--accent); }
 
-  /* Machine view */
+  /* Machine view — same palette as the rest of the site */
   #machine { display: none; }
-  body.machine { background: var(--machine-bg); }
   body.machine #human { display: none; }
   body.machine #machine { display: block; }
-  body.machine .topbar .home { color: var(--machine-dim); }
-  body.machine .viewtoggle button { color: var(--machine-dim); }
-  body.machine .viewtoggle button[aria-pressed="true"] { color: #7fd8c8; }
   .machine-inner { max-width: 780px; margin: 0 auto; }
-  .machine-copy { display: block; width: 100%; margin: 34px 0 22px; background: none; border: 1px solid var(--machine-dim); color: var(--machine-text); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
-  .machine-copy:hover { border-color: #7fd8c8; color: #7fd8c8; }
-  #machine pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: var(--machine-text); white-space: pre-wrap; word-wrap: break-word; padding-bottom: 60px; }
+  .machine-copy { display: block; width: 100%; margin: 34px 0 22px; background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+  .machine-copy:hover { background: var(--accent-dim); border-color: var(--accent); }
+  .machine-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #machine pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; padding-bottom: 60px; }
 
   @media (prefers-reduced-motion: reduce) { .cta, .cta:hover { transition: none; transform: none; } }
 </style>
