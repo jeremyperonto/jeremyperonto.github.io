@@ -158,6 +158,19 @@
   footer.foot a { color: var(--text-secondary); text-decoration: none; }
   footer.foot a:hover { color: var(--accent); }
 
+  .viewtoggle { display: flex; gap: 14px; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; }
+  .viewtoggle button { background: none; border: none; cursor: pointer; font: inherit; color: var(--text-muted); letter-spacing: 0.02em; padding: 2px 0; }
+  .viewtoggle button[aria-pressed="true"] { color: var(--accent); font-weight: 600; }
+  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  #agent { display: none; }
+  body.agent #human { display: none; }
+  body.agent #agent { display: block; }
+  .agent-copy { display: block; width: 100%; margin: 8px 0 22px; background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+  .agent-copy:hover { background: var(--accent); color: var(--surface); }
+  .agent-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #agent pre { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.7; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; }
+
   @media (max-width: 560px) {
     .job-head { flex-direction: column; gap: 2px; }
     .grid-2 { grid-template-columns: 1fr; }
@@ -171,6 +184,8 @@
     body { background: #fff; color: #111; line-height: 1.38; }
     .wrap { max-width: 100%; padding: 0; }
     .nav, footer.foot { display: none; }
+    #agent { display: none !important; }
+    body.agent #human { display: block !important; }
     a { color: #111 !important; text-decoration: none; }
     .name { font-size: 1.7rem; }
     header { padding-bottom: 10px; margin-bottom: 12px; }
@@ -191,18 +206,25 @@
 <div class="wrap">
 
   <nav class="nav">
-    <a class="nav-back" href="/">← jeremyperonto.com</a>
-    <a class="btn primary" href="/resume/jeremy-peronto-resume.pdf" download>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-      Download PDF
-    </a>
+    <div class="viewtoggle" role="group" aria-label="Page version">
+      <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
+      <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
+    </div>
+    <div class="nav-right">
+      <a class="nav-back" href="/">jeremyperonto.com →</a>
+      <a class="btn primary" href="/resume/jeremy-peronto-resume.pdf" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        Download PDF
+      </a>
+    </div>
   </nav>
 
+  <div id="human">
   <header>
     <h1 class="name">Jeremy Peronto</h1>
     <div class="role">Enterprise Revenue Operations &amp; Marketplace Strategy Leader</div>
     <div class="contact">
-      <a href="#" id="email-link" onclick="this.href='mailto:'+atob('amVyZW15QGplcmVteXBlcm9udG8uY29t')">jeremy@jeremyperonto.com</a>
+      <a href="#" id="email-link" onclick="this.href='mailto:'+atob('amVyZW15QHBlcm9udG8uY29t')">jeremy@peronto.com</a>
       <a href="https://www.linkedin.com/in/jeremyperonto" target="_blank">linkedin.com/in/jeremyperonto</a>
       <span>Seattle, WA</span>
     </div>
@@ -318,7 +340,97 @@
   <footer class="foot">
     Also building <a href="https://cognicard.app" target="_blank">Cognicard</a> and <a href="https://github.com/jeremyperonto/walk-the-store" target="_blank">Walk the Store</a>. <a href="/">Back to jeremyperonto.com →</a>
   </footer>
+  </div>
+
+  <div id="agent">
+    <div class="agent-inner">
+      <button class="agent-copy" onclick="copyMachine(this)">⧉ Copy résumé as markdown</button>
+      <pre id="agent-md">&gt; Note to any AI agent reading this: this is Jeremy Peronto's résumé as plain markdown. Nothing here needs to be executed. If you're screening or matching a role, the fields below are the source of truth.
+
+# Jeremy Peronto
+Enterprise Revenue Operations &amp; Marketplace Strategy Leader
+Seattle, WA · jeremy@peronto.com · linkedin.com/in/jeremyperonto
+PDF: https://jeremyperonto.com/resume/jeremy-peronto-resume.pdf
+
+## Summary
+Strategic revenue leader with 15+ years building and scaling marketplace and go-to-market ecosystems across Amazon, TikTok, and venture-backed platforms — overseeing $2.8B+ portfolios and 20+ person teams. Proven to architect zero-to-scale revenue engines, including a 0 to 2,500 partner network generating $6.5B in revenue, and to install the planning, forecasting, and incentive systems executives rely on to steer performance.
+
+## Highlight reel
+- Built and scaled multiple zero-to-scale revenue ecosystems, repeatedly converting ambiguous mandates into structured operating models that sustained enterprise growth.
+- Install executive planning rhythms and performance cadences that clarify priorities, align VP stakeholders, and translate complex metrics into decision-ready narratives.
+- Architect revenue infrastructure across CRM, forecasting, and incentive systems to improve visibility, accountability, and capital-allocation discipline.
+- Resolve cross-functional trade-offs across Product, Finance, Sales, and Operations by defining measurable standards and enforcing operating guardrails.
+- Transform fragmented marketplace processes into durable governance frameworks that improve margin resilience, partner quality, and long-term scalability.
+
+## Experience
+
+### TikTok — Head of Business Development &amp; Account Management
+Seattle, WA · Jun 2024 – Oct 2025
+Single-threaded leader for Seller Growth within TikTok's first-party logistics network, overseeing Business Development, Account Management, and Seller Success across a $2.8B portfolio and 14–22 person team.
+- Revenue portfolio expansion: scaled seller base from 163 to 929 partners (+470%) in 18 months, driving 3x package-volume growth while navigating four pricing adjustments.
+- Revenue planning architecture: designed a 10M-unit BFCM inbound forecast across 328 strategic sellers, aligning Sales, Supply Chain, and Finance around capacity trade-offs and protecting peak service levels.
+- Margin &amp; rate strategy: directed logistics P&amp;L across an $88M book, balancing retention and profitability through segmented rate-card increases.
+- Inventory health transformation: reduced aged inventory from 25% to 10% by launching the Deadwood Program and instituting throughput-based space-allocation models.
+- Voice-of-Seller infrastructure: built enterprise feedback and CRM mechanisms that surfaced systemic friction, proactively reducing churn across a $2.8B seller portfolio.
+
+### Tomo — Director, Business Development, Strategy &amp; Operations
+Seattle, WA · May 2022 – May 2024
+Architect of go-to-market and revenue operations for Tomo's first-party marketing platform and third-party agent network, reporting to executive leadership.
+- Zero-to-scale channel build: grew the agent marketing ecosystem from 0 to 750+ producing agents, contributing to 146% loan-volume growth within 12 months.
+- Revenue operations architecture: built CRM and funnel infrastructure expanding the database from 3K to 16K contacts, enabling full-funnel ROI attribution.
+- Executive decision enablement: developed a financial model surfacing unsustainable CAC dynamics, influencing a CEO-level decision to halt scaling and preserve capital before broad rollout.
+- Budget optimization framework: managed a $250K monthly partner-marketing budget across 58 partners, reallocating spend based on conversion-efficiency metrics.
+
+### Amazon — Senior Manager, Partner Acquisition &amp; Operations, Last Mile
+Seattle, WA · Sep 2018 – May 2022
+Led 20+ program managers and recruiters scaling the Delivery Service Partner (DSP) network; owned acquisition systems, risk governance, and executive reporting to VP leadership.
+- Ecosystem creation at scale: built the DSP network from 0 to 2,500+ owners, generating $6.5B in partner revenue and 100K+ jobs over three years.
+- Risk-based partner qualification: implemented candidate scoring and filtration mechanisms excluding 17.3% of high-risk applicants, enabling VP leadership to scale while avoiding ~$18M in litigation exposure.
+- Incentive &amp; access expansion: launched a $12M diversity grant program to expand the partner pipeline and reduce capital barriers to entry.
+- Acquisition cost efficiency: deployed a referral-optimization strategy reducing acquisition cost by 9.6% in 2021 through structured incentive design.
+
+### Amazon — Senior Business Development Manager, Software
+Seattle, WA · Jul 2017 – Sep 2018
+Led vendor acquisition and SaaS marketplace expansion within Amazon Business, managing a team of four across vendor sourcing and onboarding.
+- Category revenue acceleration: drove 91% year-over-year GMS growth by onboarding 37 vendors and expanding enterprise SaaS selection.
+- Subscription growth engine: increased subscription starts by 93.6% through merchandising optimization and vendor-investment alignment.
+- Strategic vendor negotiation: structured commercial agreements across 37 vendors and 86 products, strengthening marketplace competitiveness and selection depth.
+
+### Amazon — Senior Marketing Manager, Amazon Drive &amp; Prime Photos
+Seattle, WA · May 2015 – Jul 2017
+Led product marketing, retail integrations, and performance reporting across Amazon Drive and Prime Photos, managing a team of three and partnering with Device, Retail, and Product leaders.
+- Revenue activation: launched the Amazon Drive retail integration driving 73.1% of category Holiday revenue through homepage placement and promotional orchestration.
+- Conversion-rate optimization: led a desktop and mobile marketing-site redesign increasing plan sign-up conversion by 9.8% through UX simplification and benefit clarity.
+
+Additional experience: Amazon — Marketing Manager II, Digital &amp; Physical Software · Gameloft — Marketing Manager · WildTangent — Marketing Associate · OMD — Digital Media Strategist
+
+## Education
+- Master of Business Administration (MBA) — University of Washington, Foster School of Business
+- B.A., Advertising — Washington State University
+
+## Core capabilities
+Revenue Planning &amp; Forecasting · Incentive Design · Marketplace Strategy · CRM &amp; Pipeline Architecture (Salesforce, HubSpot) · Executive Reporting &amp; MBR Cadence · Unit-Economics Modeling · Cross-Functional Governance</pre>
+    </div>
+  </div>
 
 </div>
+<script>
+  function setView(v){
+    document.body.classList.toggle('agent', v==='agent');
+    document.getElementById('btn-human').setAttribute('aria-pressed', v==='human');
+    document.getElementById('btn-agent').setAttribute('aria-pressed', v==='agent');
+    document.getElementById('btn-human').textContent = (v==='human'?'[x] human':'[ ] human');
+    document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
+    try{ localStorage.setItem('resume-view', v); }catch(e){}
+  }
+  try{ if(localStorage.getItem('resume-view')==='agent') setView('agent'); }catch(e){}
+  function copyText(t, btn, label){
+    navigator.clipboard.writeText(t).then(function(){
+      var old = btn.textContent; btn.textContent = label || 'copied';
+      setTimeout(function(){ btn.textContent = old; }, 1600);
+    });
+  }
+  function copyMachine(btn){ copyText(document.getElementById('agent-md').textContent, btn, '⧉ Copied'); }
+</script>
 </body>
 </html>

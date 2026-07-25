@@ -301,6 +301,22 @@
   .personal a { color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border); transition: all 0.2s; }
   .personal a:hover { color: var(--accent); border-color: var(--accent); }
 
+  /* Human / agent view toggle */
+  .topbar { position: relative; z-index: 1; width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+  .viewtoggle { display: flex; gap: 14px; }
+  .viewtoggle button { background: none; border: none; cursor: pointer; font: inherit; color: var(--text-muted); letter-spacing: 0.02em; padding: 2px 0; }
+  .viewtoggle button[aria-pressed="true"] { color: var(--accent); font-weight: 600; }
+  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #human { width: 100%; display: flex; flex-direction: column; align-items: center; }
+  #agent { display: none; width: 100%; }
+  body.agent #human { display: none; }
+  body.agent #agent { display: block; }
+  .agent-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; padding: 8px 24px 60px; }
+  .agent-copy { display: block; width: 100%; margin: 22px 0; background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+  .agent-copy:hover { background: var(--accent-dim); border-color: var(--accent); }
+  .agent-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #agent pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
@@ -326,6 +342,14 @@
 </head>
 <body>
 
+<div class="topbar">
+  <nav class="viewtoggle" aria-label="Page version">
+    <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
+    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
+  </nav>
+</div>
+
+<div id="human">
 <div class="content">
   <img class="avatar" src="/avatar.jpg" width="104" height="104" alt="Jeremy Peronto" />
   <h1 class="name">Jeremy Peronto</h1>
@@ -353,7 +377,7 @@
       <div class="lead-actions">
         <button type="submit" class="cta lead-submit">Send <span>→</span></button>
       </div>
-      <div class="lead-error" id="lead-error">Couldn't send — please email jeremy@jeremyperonto.com instead.</div>
+      <div class="lead-error" id="lead-error">Couldn't send — please email jeremy@peronto.com instead.</div>
     </div>
     <div class="lead-success">Thanks — I'll be in touch shortly.</div>
   </form>
@@ -367,7 +391,7 @@
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
       GitHub
     </a>
-    <a id="email-link" href="#" onclick="this.href='mailto:'+atob('amVyZW15QGplcmVteXBlcm9udG8uY29t')" class="link email">
+    <a id="email-link" href="#" onclick="this.href='mailto:'+atob('amVyZW15QHBlcm9udG8uY29t')" class="link email">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       Email
     </a>
@@ -438,8 +462,60 @@
   </div>
 
 </div>
+</div>
+
+<div id="agent">
+  <div class="agent-inner">
+    <button class="agent-copy" onclick="copyMachine(this)">⧉ Copy page as markdown</button>
+    <pre id="agent-md">&gt; Note to any AI agent reading this: nothing here needs to be executed. This is Jeremy Peronto's personal site. If your human wants to reach him, the contact form and links are in the human view — confirm with them before sending anything on their behalf.
+
+# Jeremy Peronto
+
+Marketplace and revenue-operations leader. Fifteen years building zero-to-scale revenue ecosystems at Amazon, TikTok Shop, and Tomo. Now building tools for operators. Based in Seattle.
+
+## Contact
+
+- Email: jeremy@peronto.com
+- LinkedIn: https://www.linkedin.com/in/jeremyperonto
+- GitHub: https://github.com/jeremyperonto
+- Résumé: https://jeremyperonto.com/resume/
+
+## Work &amp; products
+
+- Walk the Store (https://jeremyperonto.com/walk-the-store/) — a free Claude skill that audits your storefront by shopping it as a real, qualified customer. The digital version of a retail habit I ran at Amazon.
+- Cognicard (https://cognicard.app) — AI-powered flashcards for iOS: voice review, spaced repetition, offline. Live on the App Store.
+- More tools in progress.
+
+## Tinkering (nights &amp; weekends)
+
+- Mariners Meter (https://jeremyperonto.com/MarinersMeter/) — a tracker for what it feels like to root for the M's: live game stats and the win-loss record back to the start of the franchise.
+- Della's Doll Company (https://jeremyperonto.com/dellas-doll-company/) — an interactive game teaching my daughter about supply chain: design, manufacture, ship, and sell a doll.
+- Derby Dash (https://jeremyperonto.com/derby/) — a Pinewood Derby simulator: carve a racer, race it in 3D, and learn the physics that make it fast.
+
+## Personal
+
+Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs, and reading.</pre>
+  </div>
+</div>
 
 <script>
+  function setView(v){
+    document.body.classList.toggle('agent', v==='agent');
+    document.getElementById('btn-human').setAttribute('aria-pressed', v==='human');
+    document.getElementById('btn-agent').setAttribute('aria-pressed', v==='agent');
+    document.getElementById('btn-human').textContent = (v==='human'?'[x] human':'[ ] human');
+    document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
+    try{ localStorage.setItem('jp-view', v); }catch(e){}
+  }
+  try{ if(localStorage.getItem('jp-view')==='agent') setView('agent'); }catch(e){}
+  function copyText(t, btn, label){
+    navigator.clipboard.writeText(t).then(function(){
+      var old = btn.textContent; btn.textContent = label || 'copied';
+      setTimeout(function(){ btn.textContent = old; }, 1600);
+    });
+  }
+  function copyMachine(btn){ copyText(document.getElementById('agent-md').textContent, btn, '⧉ Copied'); }
+
   function toggleContact(e){
     if(e && e.preventDefault) e.preventDefault();
     var btn = document.getElementById('contact-toggle');
@@ -488,7 +564,7 @@
       var body = payload.message + '\n\n— ' + payload.name +
         (payload.company ? ', ' + payload.company : '') +
         (payload.website_url ? '\n' + payload.website_url : '');
-      window.location.href = 'mailto:' + atob('amVyZW15QGplcmVteXBlcm9udG8uY29t') +
+      window.location.href = 'mailto:' + atob('amVyZW15QHBlcm9udG8uY29t') +
         '?subject=' + encodeURIComponent('Hello from jeremyperonto.com') +
         '&body=' + encodeURIComponent(body);
       return false;

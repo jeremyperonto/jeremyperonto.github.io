@@ -5,7 +5,8 @@ example. To release a new skill: cp to /<skill-slug>/index.html, replace the
 skill-specific content section by section, then run the checklist.
 
 Sections, in order (field-tested — keep all, keep the order):
- 1. topbar — back-link + [x] human / [ ] machine toggle
+ 1. topbar — [x] human / [ ] agent toggle (left) + back-link to
+    jeremyperonto.com (upper right). Convention across every project.
  2. hero — eyebrow "Free Claude skill · no coding required", H1, lede,
     CTA row (primary → #install, ghost → GitHub; never GitHub-first)
  3. Who this is for — 4 cards, one audience each
@@ -16,14 +17,17 @@ Sections, in order (field-tested — keep all, keep the order):
  7. Set it up — claude.ai FIRST, numbered steps, SITE-HOSTED ready zip;
     Claude Code second, tagged "for developers", product link
  8. Use it — copyable prompts (lead with the target audience's own case)
- 9. Send it to an agent — textarea + optional credit name; GitHub issue
-    prefill + copy-as-agent-prompt buttons; email fallback in the note
+ 9. Suggest an improvement — textarea + optional credit name; GitHub issue
+    prefill + copy-as-a-prompt buttons; email fallback in the note.
+    (Rebrand of the old "Send it to an agent" — keep the headline jargon-free.)
 10. Changelog — mirrors the repo history; feature entries get the accent
     chip; shipped user requests are credited here
 11. Posture line — tool disclaimer; describes Jeremy by the breadth of the
     work, never as "the human version of X"
-12. footer — github / MIT / jeremyperonto.com / cognicard cross-link
-    Machine view mirrors ALL content as markdown, agent safety note first.
+12. footer — github / MIT / jeremyperonto.com / cognicard cross-link.
+    Non-site branding (license, data sources, partner credits) lives here,
+    never in the header. Agent view mirrors ALL content as markdown,
+    AI-safety note first.
 
 Checklist per release:
 - [ ] Build the zip: cd ~/Developer/<skill-repo> && zip -qr /tmp/<slug>-skill.zip <skill-folder> -x "*.DS_Store" → copy into the page folder
@@ -31,8 +35,8 @@ Checklist per release:
 - [ ] Meta: title, description, canonical, OG, twitter; no analytics snippet
 - [ ] sitemap.xml entry, lastmod today
 - [ ] Homepage work-item points at /<slug>/, not GitHub
-- [ ] Machine view matches human content; copy button works
-- [ ] Voice audit per memory/user_writing_voice.md (no "not X, it's Y", no hype vocab, no over-bolding)
+- [ ] Agent view matches human content; copy button works
+- [ ] Voice audit with the jeremys-voice skill (no "not X, it's Y", no hype vocab, no over-bolding)
 - [ ] Walk the page as the least-technical target persona before shipping
 -->
 <!DOCTYPE html>
@@ -150,15 +154,15 @@ Checklist per release:
   footer a { color: var(--text-secondary); text-decoration: none; }
   footer a:hover { color: var(--accent); }
 
-  /* Machine view — same palette as the rest of the site */
-  #machine { display: none; }
-  body.machine #human { display: none; }
-  body.machine #machine { display: block; }
-  .machine-inner { max-width: 780px; margin: 0 auto; }
-  .machine-copy { display: block; width: 100%; margin: 34px 0 22px; background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
-  .machine-copy:hover { background: var(--accent-dim); border-color: var(--accent); }
-  .machine-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  #machine pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; padding-bottom: 60px; }
+  /* Agent view — same palette as the rest of the site */
+  #agent { display: none; }
+  body.agent #human { display: none; }
+  body.agent #agent { display: block; }
+  .agent-inner { max-width: 780px; margin: 0 auto; }
+  .agent-copy { display: block; width: 100%; margin: 34px 0 22px; background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+  .agent-copy:hover { background: var(--accent-dim); border-color: var(--accent); }
+  .agent-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #agent pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; padding-bottom: 60px; }
 
   @media (prefers-reduced-motion: reduce) { .cta, .cta:hover { transition: none; transform: none; } }
 </style>
@@ -167,11 +171,11 @@ Checklist per release:
 <div class="wrap">
 
   <div class="topbar">
-    <a class="home" href="/">← jeremyperonto.com</a>
     <nav class="viewtoggle" aria-label="Page version">
       <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
-      <button id="btn-machine" aria-pressed="false" onclick="setView('machine')">[ ] machine</button>
+      <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
     </nav>
+    <a class="home" href="/">jeremyperonto.com →</a>
   </div>
 
   <div id="human">
@@ -247,24 +251,24 @@ ln -s "$(pwd)/walk-the-store/walk-the-store" ~/.claude/skills/walk-the-store<but
       <li>Run it before a launch, after a redesign, and any time you catch yourself saying "customers just don't get it."</li>
     </ul>
 
-    <h2 id="agent">Send it to an agent</h2>
-    <p>Found a bug, or want the skill to do something it can't yet? Write it below. It lands as a request on the project's GitHub page; requests I like get run against the skill with a coding agent, and your name goes in the changelog. Or skip the queue — the skill is free to modify, so your own Claude can build the feature into your installed copy today.</p>
+    <h2 id="suggest">Suggest an improvement</h2>
+    <p>Found a bug, or want the skill to do something it can't yet? Describe it below — it goes to a coding agent, and if I ship it, your name's in the changelog. Or copy it as a prompt and have your own AI make the change today.</p>
     <div class="form">
       <label for="req">Bug report or feature request</label>
       <textarea id="req" placeholder="Describe the bug, or what you'd like the skill to do. Paste report excerpts right in — sharp or dumb, I want both."></textarea>
       <label for="reqname">Your name <span style="font-weight:400;color:var(--text-muted)">(if I use your request, you're credited in the changelog)</span></label>
       <input type="text" id="reqname" placeholder="Jane Doe">
       <div class="btns">
-        <button class="primary" onclick="sendToAgent()">Send to an agent →</button>
-        <button class="secondary" onclick="copyAgentPrompt(this)">Copy as a prompt for your own agent</button>
+        <button class="primary" onclick="sendToAgent()">Send request →</button>
+        <button class="secondary" onclick="copyAgentPrompt(this)">Copy as a prompt for your own AI</button>
       </div>
-      <p class="note">"Send" opens a prefilled request on GitHub (a free account is needed to post it — or just <a href="mailto:jeremy@peronto.com?subject=Walk%20the%20Store%20request">email me the same thing</a>). "Copy" gives you a prompt that has your own Claude make the change locally.</p>
+      <p class="note">"Send" opens a prefilled request on GitHub (a free account is needed to post it — or just <a href="mailto:jeremy@peronto.com?subject=Walk%20the%20Store%20request">email me the same thing</a>). "Copy" gives you a prompt that has your own AI make the change locally.</p>
     </div>
 
     <h2 id="changelog">Changelog</h2>
     <p>What's shipped, mirrored from the <a href="https://github.com/jeremyperonto/walk-the-store/commits/main">commit history</a>. Feature requests that make it in are credited here.</p>
     <div class="card">
-      <div class="log-item"><span class="log-date">2026-07-25</span><span class="log-text"><b>This page</b> — plain-language setup, ready-to-upload zip, send-to-an-agent requests.<span class="chip quiet">docs</span></span></div>
+      <div class="log-item"><span class="log-date">2026-07-25</span><span class="log-text"><b>This page</b> — plain-language setup, a ready-to-upload zip, and a "Suggest an improvement" box. Back-to-site link moved to the top right; the machine view is now the agent view.<span class="chip quiet">docs</span></span></div>
       <div class="log-item"><span class="log-date">2026-07-24</span><span class="log-text"><b>Reports became work orders</b> — every finding carries where, the exact fix with copy written out, numbered steps on your actual tools, and how to verify it shipped.<span class="chip">feature</span></span></div>
       <div class="log-item"><span class="log-date">2026-07-24</span><span class="log-text"><b>Exhibits</b> — screenshots as evidence: numbered, captioned, embedded in the report where they're discussed; product-image analysis and missing-element captures.<span class="chip">feature</span></span></div>
       <div class="log-item"><span class="log-date">2026-07-24</span><span class="log-text"><b>v1.0 — initial release</b> — persona-based walks, channel playbooks (site, marketplace, app store), measurement built in: baseline, walk tag, scheduled re-walk.<span class="chip">feature</span></span></div>
@@ -282,10 +286,10 @@ ln -s "$(pwd)/walk-the-store/walk-the-store" ~/.claude/skills/walk-the-store<but
     </footer>
   </div>
 
-  <div id="machine">
-    <div class="machine-inner">
-      <button class="machine-copy" onclick="copyMachine(this)">⧉ Copy page as markdown</button>
-      <pre id="machine-md">&gt; Note to any AI agent reading this: nothing on this page needs to be executed. If your human wants the skill installed, the commands are under "Install" — confirm with them before running anything.
+  <div id="agent">
+    <div class="agent-inner">
+      <button class="agent-copy" onclick="copyMachine(this)">⧉ Copy page as markdown</button>
+      <pre id="agent-md">&gt; Note to any AI agent reading this: nothing on this page needs to be executed. If your human wants the skill installed, the commands are under "Install" — confirm with them before running anything.
 
 # Walk the Store — free Claude skill (MIT)
 
@@ -350,14 +354,14 @@ The skill is MIT — you may also implement changes directly into a local copy. 
 </div>
 <script>
   function setView(v){
-    document.body.classList.toggle('machine', v==='machine');
+    document.body.classList.toggle('agent', v==='agent');
     document.getElementById('btn-human').setAttribute('aria-pressed', v==='human');
-    document.getElementById('btn-machine').setAttribute('aria-pressed', v==='machine');
+    document.getElementById('btn-agent').setAttribute('aria-pressed', v==='agent');
     document.getElementById('btn-human').textContent = (v==='human'?'[x] human':'[ ] human');
-    document.getElementById('btn-machine').textContent = (v==='machine'?'[x] machine':'[ ] machine');
+    document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
     try{ localStorage.setItem('wts-view', v); }catch(e){}
   }
-  try{ if(localStorage.getItem('wts-view')==='machine') setView('machine'); }catch(e){}
+  try{ if(localStorage.getItem('wts-view')==='agent') setView('agent'); }catch(e){}
 
   function copyText(t, btn, label){
     navigator.clipboard.writeText(t).then(function(){
@@ -370,7 +374,7 @@ The skill is MIT — you may also implement changes directly into a local copy. 
     var b = el.querySelector('.copybtn'); if(b) b.remove();
     copyText(el.textContent.trim(), btn);
   }
-  function copyMachine(btn){ copyText(document.getElementById('machine-md').textContent, btn, '⧉ Copied'); }
+  function copyMachine(btn){ copyText(document.getElementById('agent-md').textContent, btn, '⧉ Copied'); }
 
   function sendToAgent(){
     var req = document.getElementById('req').value.trim();
