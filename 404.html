@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>404 — Undeliverable · Jeremy Peronto</title>
+<title>404 — Swing and a miss · Jeremy Peronto</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#f6f2ea">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f6f2ea'/%3E%3Ctext x='16' y='22' font-family='system-ui,-apple-system,sans-serif' font-size='16' font-weight='700' fill='%230f766e' text-anchor='middle'%3EJP%3C/text%3E%3C/svg%3E">
@@ -57,44 +57,51 @@
     animation: fadeUp 0.6s ease forwards 0.1s;
   }
 
-  /* Delivery route: a package that can't reach its stop */
-  .route {
+  /* The pitch: a ball that blows right past the swing */
+  .pitch {
     position: relative;
-    width: 230px;
-    height: 30px;
-    margin: 0 auto 22px;
+    width: 250px;
+    height: 44px;
+    margin: 0 auto 20px;
   }
-  .route .line {
+  .pitch .zone {
     position: absolute;
+    right: 4px;
     top: 50%;
-    left: 4px;
-    right: 22px;
-    border-top: 2px dashed var(--border);
+    transform: translateY(-50%);
+    width: 26px;
+    height: 36px;
+    border: 1.5px dashed var(--border);
+    border-radius: 3px;
   }
-  .route .stop {
+  .pitch .swing {
     position: absolute;
+    right: 2px;
     top: 50%;
-    right: 0;
     transform: translateY(-50%);
     font-family: 'JetBrains Mono', monospace;
     font-weight: 600;
+    font-size: 1.05rem;
     color: var(--fail);
-    font-size: 1.1rem;
+    opacity: 0;
+    animation: whiff 0.4s ease forwards 1.7s;
   }
-  .route .pkg {
+  .pitch .ball {
     position: absolute;
-    top: 50%;
     left: 0;
+    top: 50%;
+    font-size: 1.2rem;
     transform: translateY(-50%);
-    font-size: 1.15rem;
-    animation: deliver 2.6s cubic-bezier(0.5, 0, 0.5, 1) forwards 0.3s;
+    animation: pitch 1.8s cubic-bezier(0.35, 0, 0.35, 1) forwards 0.4s;
   }
-  @keyframes deliver {
-    0%   { left: 0; }
-    68%  { left: calc(100% - 46px); }
-    76%  { left: calc(100% - 54px); }   /* bumps the wall */
-    82%  { left: calc(100% - 48px); }
-    100% { left: calc(100% - 50px); }
+  @keyframes pitch {
+    0%   { left: 0; opacity: 0; transform: translateY(-50%) rotate(0deg); }
+    12%  { opacity: 1; }
+    100% { left: calc(100% - 22px); opacity: 1; transform: translateY(-50%) rotate(900deg); }
+  }
+  @keyframes whiff {
+    from { opacity: 0; transform: translateY(-50%) scale(0.6); }
+    to   { opacity: 1; transform: translateY(-50%) scale(1); }
   }
 
   .code {
@@ -116,7 +123,7 @@
     margin-bottom: 22px;
   }
 
-  /* Tracking readout card */
+  /* Box-score style readout */
   .track {
     text-align: left;
     background: var(--surface);
@@ -130,7 +137,7 @@
     margin-bottom: 28px;
   }
   .track .row { display: flex; gap: 12px; }
-  .track .k { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; min-width: 72px; flex-shrink: 0; }
+  .track .k { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; min-width: 68px; flex-shrink: 0; }
   .track .v { color: var(--text-primary); word-break: break-all; }
   .track .v.fail { color: var(--fail); }
   .track .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--fail); margin-right: 6px; vertical-align: 1px; animation: pulse 1.6s ease-in-out infinite; }
@@ -173,7 +180,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .content { opacity: 1 !important; animation: none; }
-    .route .pkg { animation: none; left: calc(100% - 50px); }
+    .pitch .ball { animation: none; left: calc(100% - 22px); }
+    .pitch .swing { animation: none; opacity: 1; }
     .track .dot { animation: none; }
   }
 
@@ -184,23 +192,23 @@
 </head>
 <body>
   <div class="content">
-    <div class="route" aria-hidden="true">
-      <div class="line"></div>
-      <span class="pkg">📦</span>
-      <span class="stop">✕</span>
+    <div class="pitch" aria-hidden="true">
+      <div class="zone"></div>
+      <span class="ball">⚾</span>
+      <span class="swing">✕</span>
     </div>
 
     <div class="code">404</div>
-    <p class="headline">This one didn't make the last mile.</p>
+    <p class="headline">Swing and a miss.</p>
 
     <div class="track">
-      <div class="row"><span class="k">Tracking</span><span class="v" id="path">/unknown</span></div>
-      <div class="row"><span class="k">Status</span><span class="v fail"><span class="dot"></span>Undeliverable</span></div>
-      <div class="row"><span class="k">Reason</span><span class="v">No such address at this warehouse</span></div>
+      <div class="row"><span class="k">At bat</span><span class="v" id="path">/unknown</span></div>
+      <div class="row"><span class="k">Pitch</span><span class="v">Right down the middle</span></div>
+      <div class="row"><span class="k">Result</span><span class="v fail"><span class="dot"></span>Strike three, swinging</span></div>
     </div>
 
     <div class="actions">
-      <a class="cta" href="/">Return to sender <span class="arrow">→</span></a>
+      <a class="cta" href="/">Back to the dugout <span class="arrow">→</span></a>
       <a class="secondary" href="/resume/">or grab my résumé</a>
     </div>
   </div>
