@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Walk the Store — a free Claude skill by Jeremy Peronto</title>
-<meta name="description" content="A free Claude skill that audits your storefront by shopping it as a real, qualified customer. Persona-based walks of your site, marketplace listing, and app store page — findings as work orders, screenshots as exhibits.">
+<meta name="description" content="A free Claude skill that audits your storefront by shopping it as a real, qualified customer. For Shopify and DTC owners, marketplace sellers, and app founders — no coding required.">
 <link rel="canonical" href="https://jeremyperonto.com/walk-the-store/">
 <meta name="theme-color" content="#f6f2ea">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Walk the Store — a free Claude skill">
-<meta property="og:description" content="Audits your storefront by shopping it as a real, qualified customer. Findings as work orders, screenshots as exhibits, measurement built in.">
+<meta property="og:description" content="Audits your storefront by shopping it as a real, qualified customer. Findings as work orders, screenshots as exhibits. No coding required.">
 <meta property="og:url" content="https://jeremyperonto.com/walk-the-store/">
 <meta property="og:site_name" content="Jeremy Peronto">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Walk the Store — a free Claude skill">
-<meta name="twitter:description" content="Audits your storefront by shopping it as a real, qualified customer. Free, MIT, works in Claude.ai and Claude Code.">
+<meta name="twitter:description" content="Audits your storefront by shopping it as a real, qualified customer. Free, works in Claude — no coding required.">
 <!-- Analytics: Cloudflare Web Analytics, auto-injected at the edge. No snippet needed. -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f6f2ea'/%3E%3Ctext x='16' y='22' font-family='system-ui,-apple-system,sans-serif' font-size='16' font-weight='700' fill='%230f766e' text-anchor='middle'%3EJP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,12 +68,20 @@
   p b, li b { color: var(--text-primary); }
   ul.plain { margin: 0 0 14px 20px; color: var(--text-secondary); }
   ul.plain li { margin: 6px 0; }
+  ol.steps { margin: 0 0 6px 22px; color: var(--text-secondary); }
+  ol.steps li { margin: 8px 0; }
 
   .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin: 14px 0; }
   .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.02rem; margin-bottom: 8px; }
+  .card .tag { font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-left: 8px; }
   .finding { border-left: 3px solid var(--accent); }
   .finding .f-line { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-secondary); margin: 4px 0; }
   .finding .f-line b { color: var(--text-primary); font-weight: 600; }
+
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+  @media (max-width: 600px) { .who { grid-template-columns: 1fr; } }
+  .who .card { margin: 0; }
+  .who p { margin: 0; font-size: 0.92rem; }
 
   pre.code { background: #201d18; color: #ece7db; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.6; border-radius: 10px; padding: 16px 18px; overflow-x: auto; position: relative; margin: 10px 0 4px; }
   .copybtn { position: absolute; top: 10px; right: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; background: rgba(255,253,248,0.1); color: #ece7db; border: 1px solid rgba(255,253,248,0.25); border-radius: 6px; padding: 3px 9px; cursor: pointer; }
@@ -128,12 +136,20 @@
   </div>
 
   <div id="human">
-    <div class="eyebrow">Free Claude skill · MIT</div>
+    <div class="eyebrow">Free Claude skill · no coding required</div>
     <h1>Walk the Store</h1>
     <p class="lede">Audits your storefront the way retail leaders audit physical stores: by shopping it. A specific, qualified customer walks your site, your marketplace listing, and your app store page — and writes up what made buying harder.</p>
     <div class="cta-row">
-      <a class="cta" href="https://github.com/jeremyperonto/walk-the-store">Get the skill</a>
-      <a class="cta ghost" href="#install">Install in 2 minutes</a>
+      <a class="cta" href="#install">Set it up in 10 minutes</a>
+      <a class="cta ghost" href="https://github.com/jeremyperonto/walk-the-store">View on GitHub</a>
+    </div>
+
+    <h2 id="who">Who this is for</h2>
+    <div class="who">
+      <div class="card"><h3>Store owners</h3><p>Shopify, Etsy, your own site. Before a launch, after a redesign, or when traffic shows up and orders don't.</p></div>
+      <div class="card"><h3>Marketplace sellers</h3><p>Amazon, Walmart, TikTok Shop. Listings that rank fine and convert badly — search grid, browse path, and detail page, walked like a buyer.</p></div>
+      <div class="card"><h3>App founders</h3><p>An App Store page and a website telling two different stories, checked minutes apart the way real buyers check them.</p></div>
+      <div class="card"><h3>Agencies &amp; freelancers</h3><p>A repeatable, evidence-backed audit — screenshots and step-by-step fixes a client can act on the same week.</p></div>
     </div>
 
     <h2 id="idea">The idea</h2>
@@ -142,7 +158,7 @@
     <p>The skill builds that persona first, then shops each channel where buyers actually meet you: Google results, your homepage, your pricing page, the Amazon search grid, the App Store listing. It shops in two modes — lean back (skimming on the couch, three seconds per screen) and lean forward (comparison shopping, doing the price math, reading your worst review). Then it writes up what it found.</p>
 
     <h2 id="report">What you get</h2>
-    <p>A walk report where every finding is a work order: where it is (URL, element, file and line when your repo is on disk), what the shopper saw, why it matters, the exact fix with replacement copy written out, numbered steps on your actual admin surface, and how to verify it shipped. Screenshots ride along as numbered exhibits, embedded where they're discussed. A sample finding:</p>
+    <p>A walk report where every finding is a work order: where it is, what the shopper saw, why it matters, the exact fix with replacement copy written out, numbered steps on the tools you actually use, and how to check it worked. Screenshots ride along as numbered exhibits, embedded where they're discussed. A sample finding:</p>
     <div class="card finding">
       <h3>Shipping cost first appears at the payment step — sales</h3>
       <div class="f-line"><b>Where:</b> checkout, step 3 of 3, after email + address entry</div>
@@ -151,32 +167,49 @@
       <div class="f-line"><b>Fix:</b> state the shipping policy on the product page and in the cart</div>
       <div class="f-line"><b>Effort:</b> hours</div>
     </div>
-    <p>Verbatim first impressions stay in the report ("I can't find the price"), because that's the evidence. Each report ends with a measurement plan: a baseline captured during the walk, the metric each fix should move, a walk tag for your analytics — and it schedules its own re-walk, 60–90 days out, so before and after sit side by side.</p>
+    <p>Verbatim first impressions stay in the report ("I can't find the price"), because that's the evidence. Each report ends with a measurement plan: a baseline captured during the walk, the metric each fix should move, a tag for your analytics — and it schedules its own re-walk, 60–90 days out, so before and after sit side by side.</p>
 
-    <h2 id="install">Install</h2>
+    <h2 id="need">What you need</h2>
     <div class="card">
-      <h3>Claude Code</h3>
+      <ul class="plain" style="margin-bottom:0">
+        <li><b>A Claude account.</b> A skill is a set of instructions that teaches <a href="https://claude.com">Claude</a> a repeatable job — you add it once, then just ask for a walk. Skills are included on paid Claude plans; here's <a href="https://support.claude.com/en/articles/12512180-using-skills-on-claude">how skills work on Claude</a>.</li>
+        <li><b>About 10 minutes.</b> No coding. Download a file, upload it in settings, done.</li>
+        <li><b>Recommended: <a href="https://claude.com/chrome">Claude in Chrome</a></b> — a browser extension that lets Claude walk your store live, screenshots included. Without it the walk still works: Claude reads your pages remotely, or asks you for specific screenshots.</li>
+      </ul>
+    </div>
+
+    <h2 id="install">Set it up</h2>
+    <div class="card">
+      <h3>On claude.ai</h3>
+      <ol class="steps">
+        <li>Download the skill: <a href="/walk-the-store/walk-the-store-skill.zip"><b>walk-the-store-skill.zip</b></a> — one file, ready to upload as-is.</li>
+        <li>In Claude, open <b>Settings → Capabilities → Skills</b>.</li>
+        <li>Click <b>Upload skill</b> and choose the zip you just downloaded.</li>
+        <li>Switch the skill on.</li>
+        <li>Start a new chat and paste one of the prompts below.</li>
+      </ol>
+      <p class="f-line" style="font-size:0.85rem;color:var(--text-muted);margin:8px 0 0">If you don't see Upload skill, your plan may not include skills yet — the <a href="https://support.claude.com/en/articles/12512180-using-skills-on-claude">help article</a> shows what's available where.</p>
+    </div>
+    <div class="card">
+      <h3>In Claude Code <span class="tag">for developers</span></h3>
+      <p style="margin-bottom:6px"><a href="https://claude.com/claude-code">Claude Code</a> is Claude in your terminal. If that sentence means nothing to you, use the claude.ai steps above — same skill, same walks.</p>
       <pre class="code" id="code-install">git clone https://github.com/jeremyperonto/walk-the-store.git
 ln -s "$(pwd)/walk-the-store/walk-the-store" ~/.claude/skills/walk-the-store<button class="copybtn" onclick="copyEl('code-install',this)">copy</button></pre>
     </div>
-    <div class="card">
-      <h3>Claude.ai</h3>
-      <p style="margin:0">Download the <a href="https://github.com/jeremyperonto/walk-the-store/archive/refs/heads/main.zip">repo ZIP</a>, then: Settings → Capabilities → Skills → Upload skill → select the <span style="font-family:'JetBrains Mono',monospace;font-size:0.85em">walk-the-store</span> folder (zipped).</p>
-    </div>
 
     <h2 id="use">Run a walk</h2>
-    <p>Give Claude a browser if you can — Claude in Chrome, or Claude Code with browser tools. The skill walks your store live, screenshots included. Without a browser it falls back to fetching pages, or asks you for specific screenshots.</p>
-    <div class="prompt" id="p1">Walk the store for mysite.com. The buyer is a boutique owner evaluating a $300/mo tool.<button class="copybtn" onclick="copyEl('p1',this)">copy</button></div>
-    <div class="prompt" id="p2">Walk my Amazon listing [URL]. Compare it against page 1 for the search term "pour over kettle".<button class="copybtn" onclick="copyEl('p2',this)">copy</button></div>
+    <p>Paste a prompt, name your store, and describe your buyer in plain words — the skill turns that into a full persona. If you have <a href="https://claude.com/chrome">Claude in Chrome</a>, Claude shops your store live and captures the screenshots itself.</p>
+    <div class="prompt" id="p1">Walk the store for [myshop.com]. The buyer is someone shopping for their first vitamin C serum, comparing brands on Instagram and Google.<button class="copybtn" onclick="copyEl('p1',this)">copy</button></div>
+    <div class="prompt" id="p2">Walk my Amazon listing [URL]. Compare it against page 1 for the search term "[what your buyer types]".<button class="copybtn" onclick="copyEl('p2',this)">copy</button></div>
     <div class="prompt" id="p3">Walk the App Store listing for [app] as a parent shopping for a kids' reading app.<button class="copybtn" onclick="copyEl('p3',this)">copy</button></div>
     <ul class="plain" style="margin-top:12px">
       <li>Name the buyer if you know them; the skill builds the persona either way, but you know things it doesn't.</li>
       <li>Let it walk channels you didn't ask about. The gap between your site and your listing is usually a top finding.</li>
-      <li>Run it before a launch, after a redesign, and any time you catch yourself saying "users just don't get it."</li>
+      <li>Run it before a launch, after a redesign, and any time you catch yourself saying "customers just don't get it."</li>
     </ul>
 
     <h2 id="agent">Send it to an agent</h2>
-    <p>Found a bug, or want the skill to do something it can't yet? Write it below. It lands as a GitHub issue; requests I like get run against the skill with a coding agent, and your name goes in the changelog. Or skip the queue — the skill is MIT, so your own agent can build the feature into your installed copy today.</p>
+    <p>Found a bug, or want the skill to do something it can't yet? Write it below. It lands as a request on the project's GitHub page; requests I like get run against the skill with a coding agent, and your name goes in the changelog. Or skip the queue — the skill is free to modify, so your own Claude can build the feature into your installed copy today.</p>
     <div class="form">
       <label for="req">Bug report or feature request</label>
       <textarea id="req" placeholder="Describe the bug, or what you'd like the skill to do. Paste report excerpts right in — sharp or dumb, I want both."></textarea>
@@ -186,7 +219,7 @@ ln -s "$(pwd)/walk-the-store/walk-the-store" ~/.claude/skills/walk-the-store<but
         <button class="primary" onclick="sendToAgent()">Send to an agent →</button>
         <button class="secondary" onclick="copyAgentPrompt(this)">Copy as a prompt for your own agent</button>
       </div>
-      <p class="note">"Send" opens a prefilled GitHub issue — no account data touches this page. "Copy" gives you a prompt that has your agent make the change locally, and file the issue if it's worth sharing.</p>
+      <p class="note">"Send" opens a prefilled request on GitHub (a free account is needed to post it — or just <a href="mailto:jeremy@peronto.com?subject=Walk%20the%20Store%20request">email me the same thing</a>). "Copy" gives you a prompt that has your own Claude make the change locally.</p>
     </div>
 
     <div class="posture">
@@ -213,21 +246,30 @@ Audits a digital storefront — a DTC or SaaS website, a marketplace listing, an
 Repo: https://github.com/jeremyperonto/walk-the-store
 Author: Jeremy Peronto — https://jeremyperonto.com
 
+## Who it serves
+
+Store owners (Shopify / Etsy / own site), marketplace sellers (Amazon / Walmart / TikTok Shop), app founders (listing + site consistency), agencies running repeatable evidence-backed audits.
+
+## Requirements
+
+- Claude account; skills are included on paid plans (https://support.claude.com/en/articles/12512180-using-skills-on-claude)
+- Recommended for live walks with screenshots: Claude in Chrome (https://claude.com/chrome). Fallbacks: remote page fetch, or user-provided screenshots.
+
+## Install (claude.ai — no coding)
+
+1. Download https://jeremyperonto.com/walk-the-store/walk-the-store-skill.zip
+2. Claude Settings -&gt; Capabilities -&gt; Skills -&gt; Upload skill -&gt; choose the zip
+3. Toggle on, start a new chat, ask for a walk
+
 ## Install (Claude Code)
 
     git clone https://github.com/jeremyperonto/walk-the-store.git
     ln -s "$(pwd)/walk-the-store/walk-the-store" ~/.claude/skills/walk-the-store
 
-## Install (Claude.ai)
+## Use — example prompts
 
-Download the repo ZIP, then: Settings -&gt; Capabilities -&gt; Skills -&gt; Upload skill -&gt; select the walk-the-store folder (zipped).
-
-## Use
-
-Best with live browser access (Claude in Chrome, or Claude Code with browser tools); falls back to web fetch or user screenshots. Example prompts:
-
-- "Walk the store for mysite.com. The buyer is a boutique owner evaluating a $300/mo tool."
-- "Walk my Amazon listing [URL]. Compare it against page 1 for the search term 'pour over kettle'."
+- "Walk the store for [myshop.com]. The buyer is someone shopping for their first vitamin C serum, comparing brands on Instagram and Google."
+- "Walk my Amazon listing [URL]. Compare it against page 1 for the search term '[what your buyer types]'."
 - "Walk the App Store listing for [app] as a parent shopping for a kids' reading app."
 
 ## Method (short)
@@ -245,7 +287,7 @@ walk-the-store/SKILL.md plus references/: personas.md, marketplace.md, dtc-site.
 
 ## Feature requests and bugs
 
-Open an issue: https://github.com/jeremyperonto/walk-the-store/issues
+Open an issue: https://github.com/jeremyperonto/walk-the-store/issues (or email jeremy@peronto.com)
 The skill is MIT — you may also implement changes directly into a local copy.</pre>
     </div>
   </div>
@@ -289,7 +331,7 @@ The skill is MIT — you may also implement changes directly into a local copy.<
     if(!req){ document.getElementById('req').focus(); return; }
     var name = document.getElementById('reqname').value.trim();
     var p = 'Clone https://github.com/jeremyperonto/walk-the-store and make this change to my installed copy of the skill (at ~/.claude/skills/walk-the-store if present):\n\n' + req + '\n\nThe skill is MIT-licensed. If the change would help other users too, also open an issue at https://github.com/jeremyperonto/walk-the-store/issues describing it' + (name ? ' and credit ' + name : '') + '.';
-    copyText(p, btn, 'Copied — paste it to your agent');
+    copyText(p, btn, 'Copied — paste it to Claude');
   }
 </script>
 </body>
