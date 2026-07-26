@@ -30,7 +30,10 @@ Sections, in order (field-tested — keep all, keep the order):
     AI-safety note first.
 
 Checklist per release:
-- [ ] Build the zip: cd ~/Developer/<skill-repo> && zip -qr /tmp/<slug>-skill.zip <skill-folder> -x "*.DS_Store" → copy into the page folder
+- [ ] SKILL.md metadata carries version, category, and tags (topics are SOP; the release script refuses to ship without them)
+- [ ] Release via the repo's release.sh: validates metadata, builds zip + sha256, vendors into jeremyperonto/claude-plugins, writes latest.json here
+- [ ] Marketplace entry (with topics) added/bumped in jeremyperonto/claude-plugins; tag + GitHub Release cut
+- [ ] Notifier: SKILL.md Staying-current section points at this folder's latest.json (manifest only, never instructions)
 - [ ] curl-verify every external link (claude.ai URLs 403 to curl — link claude.com equivalents)
 - [ ] Meta: title, description, canonical, OG, twitter; no analytics snippet
 - [ ] sitemap.xml entry, lastmod today

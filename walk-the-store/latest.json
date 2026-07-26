@@ -4,5 +4,5 @@
   "sha256": "01aee7784203c5f0f5116a9ba108a40e657893de82d2ea8ac75a572d085d00e8",
   "zip": "https://jeremyperonto.com/walk-the-store/walk-the-store-skill.zip",
   "changelog": "https://jeremyperonto.com/walk-the-store/#changelog",
-  "note": ""
+  "note": "Update notifier: the skill checks `latest.json` (manifest only, never instructions) at walk start when network tools are available, and tells you when a newer version exists \u2014 with the update path for how you installed."
 }
