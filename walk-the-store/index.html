@@ -149,7 +149,7 @@
     <h2 id="who">Who this is for</h2>
     <div class="who">
       <div class="card"><h3>Store owners</h3><p>Shopify, Etsy, your own site. Before a launch, after a redesign, or when traffic shows up and orders don't.</p></div>
-      <div class="card"><h3>Marketplace sellers</h3><p>Amazon, Walmart, TikTok Shop. Listings that rank fine and convert badly — search grid, browse path, and detail page, walked like a buyer.</p></div>
+      <div class="card"><h3>Marketplace sellers</h3><p>Amazon, Walmart, eBay, Etsy, TikTok Shop, Shopify — a dedicated rules playbook for each, built on the marketplace's own documentation. Search grid, browse path, and detail page, walked like a buyer.</p></div>
       <div class="card"><h3>App founders</h3><p>An App Store page and a website telling two different stories, checked minutes apart the way real buyers check them.</p></div>
       <div class="card"><h3>Agencies &amp; freelancers</h3><p>A repeatable, evidence-backed audit — screenshots and step-by-step fixes a client can act on the same week.</p></div>
     </div>
@@ -228,6 +228,7 @@
     <h2 id="changelog">Changelog</h2>
     <p>What's shipped, mirrored from the <a href="https://github.com/jeremyperonto/walk-the-store/commits/main">commit history</a>. Feature requests that make it in are credited here.</p>
     <div class="card">
+      <div class="log-item"><span class="log-date">2026-07-27</span><span class="log-text"><b>v1.3 — marketplace playbooks</b> — Amazon, Walmart, eBay, Etsy, TikTok Shop, and Shopify each get a rules file sourced from the marketplace's own seller documentation, with dated links the skill re-checks when they age. Hardened by the first randomized pre-release eval: five product walks, scored, and fed back in before shipping.<span class="chip">feature</span></span></div>
       <div class="log-item"><span class="log-date">2026-07-25</span><span class="log-text"><b>v1.2 — updates handle themselves</b> — Claude Code installs auto-update through the new <a href="https://github.com/jeremyperonto/claude-plugins">plugin marketplace</a>, and the skill checks for new versions at walk start and tells you the update path for your install.<span class="chip">feature</span></span></div>
       <div class="log-item"><span class="log-date">2026-07-25</span><span class="log-text"><b>This page</b> — plain-language setup, a ready-to-upload zip, and a "Suggest an improvement" box. Back-to-site link moved to the top right; the machine view is now the agent view.<span class="chip quiet">docs</span></span></div>
       <div class="log-item"><span class="log-date">2026-07-24</span><span class="log-text"><b>Reports became work orders</b> — every finding carries where, the exact fix with copy written out, numbered steps on your actual tools, and how to verify it shipped.<span class="chip">feature</span></span></div>
@@ -299,10 +300,11 @@ Updates ship on version bumps via the marketplace. Plain-clone fallback lives in
 
 ## Skill contents
 
-walk-the-store/SKILL.md plus references/: personas.md, marketplace.md, dtc-site.md, app-store.md, exhibits.md, measurement.md, report-template.md
+walk-the-store/SKILL.md plus references/: personas.md, marketplace.md, dtc-site.md, app-store.md, exhibits.md, measurement.md, report-template.md, and marketplaces/{amazon,walmart,ebay,etsy,tiktok-shop,shopify}.md — per-marketplace rules with sourced official docs, loaded one per walk
 
 ## Changelog (features)
 
+- 2026-07-27 v1.3: per-marketplace playbooks (6 marketplaces, sourced official docs, freshness rule); first randomized pre-deploy eval
 - 2026-07-25 v1.2: marketplace auto-updates (Claude Code) + in-skill version check against latest.json
 - 2026-07-24 v1.0: persona walks, channel playbooks, measurement (baseline / walk tag / re-walk)
 - 2026-07-24: exhibits — embedded, captioned screenshot evidence

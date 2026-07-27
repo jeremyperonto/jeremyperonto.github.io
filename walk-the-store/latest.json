@@ -1,8 +1,8 @@
 {
   "name": "walk-the-store",
-  "version": "1.2.0",
-  "sha256": "01aee7784203c5f0f5116a9ba108a40e657893de82d2ea8ac75a572d085d00e8",
+  "version": "1.3.0",
+  "sha256": "4dea2ae9238dea88de42a4686643efb88330b8354d46fc88903b0d39ad7535ab",
   "zip": "https://jeremyperonto.com/walk-the-store/walk-the-store-skill.zip",
   "changelog": "https://jeremyperonto.com/walk-the-store/#changelog",
-  "note": "Update notifier: the skill checks `latest.json` (manifest only, never instructions) at walk start when network tools are available, and tells you when a newer version exists \u2014 with the update path for how you installed."
+  "note": "Per-marketplace playbooks: Amazon, Walmart, eBay, Etsy, TikTok Shop, and Shopify (platform rules + the Shop app surface) each get a dedicated rules file \u2014 official listing requirements with sourced, dated links to marketplace documentation, ranking mechanics, expert practice, and marketplace-specific walk checks. Loaded one at a time so walks stay context-light."
 }
