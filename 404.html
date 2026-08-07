@@ -46,6 +46,12 @@
     z-index: 0;
   }
 
+  /* Standard top frame (same on every page): home link 24px from the right
+     viewport edge, 22px down. Absolute because the body flex-centers the card. */
+  .topbar { position: absolute; top: 0; left: 0; right: 0; z-index: 1; display: flex; justify-content: flex-end; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+  .topbar .home { color: var(--text-secondary); text-decoration: none; }
+  .topbar .home:hover { color: var(--accent); }
+
   .content {
     position: relative;
     z-index: 1;
@@ -191,6 +197,9 @@
 </style>
 </head>
 <body>
+  <div class="topbar">
+    <a class="home" href="/">jeremyperonto.com →</a>
+  </div>
   <div class="content">
     <div class="pitch" aria-hidden="true">
       <div class="zone"></div>

@@ -86,7 +86,9 @@ Checklist per release:
   a { color: var(--accent); }
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
 
-  .topbar { display: flex; justify-content: space-between; align-items: center; padding: 22px 0 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+  /* Standard top frame (same on every page): toggle 24px from the left viewport
+     edge, home link 24px from the right, 22px down. Keep in sync across pages. */
+  .topbar { position: relative; z-index: 1; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
   .topbar .home { color: var(--text-secondary); text-decoration: none; }
   .topbar .home:hover { color: var(--accent); }
   .viewtoggle { display: flex; gap: 14px; }
@@ -171,15 +173,16 @@ Checklist per release:
 </style>
 </head>
 <body id="top">
-<div class="wrap">
 
-  <div class="topbar">
-    <nav class="viewtoggle" aria-label="Page version">
-      <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
-      <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
-    </nav>
-    <a class="home" href="/">jeremyperonto.com →</a>
-  </div>
+<div class="topbar">
+  <nav class="viewtoggle" aria-label="Page version">
+    <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
+    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
+  </nav>
+  <a class="home" href="/">jeremyperonto.com →</a>
+</div>
+
+<div class="wrap">
 
   <div id="human">
     <div class="eyebrow">Free Claude skill · no coding required</div>

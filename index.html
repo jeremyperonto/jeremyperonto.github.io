@@ -302,7 +302,9 @@
   .personal a:hover { color: var(--accent); border-color: var(--accent); }
 
   /* Human / agent view toggle */
-  .topbar { position: relative; z-index: 1; width: 100%; max-width: 600px; margin: 0 auto; display: flex; justify-content: flex-start; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+  /* Standard top frame (same on every page): toggle 24px from the left viewport
+     edge, home link 24px from the right, 22px down. Keep in sync across pages. */
+  .topbar { position: relative; z-index: 1; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
   .viewtoggle { display: flex; gap: 14px; }
   .viewtoggle button { background: none; border: none; cursor: pointer; font: inherit; color: var(--text-muted); letter-spacing: 0.02em; padding: 2px 0; }
   .viewtoggle button[aria-pressed="true"] { color: var(--accent); font-weight: 600; }
