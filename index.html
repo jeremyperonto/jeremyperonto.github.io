@@ -421,7 +421,7 @@
 
   <div class="stack">
     <div class="zone">
-      <div class="zone-header">Consulting <span class="zone-sub">what I do for clients</span></div>
+      <div class="zone-header">Consulting <span class="zone-sub">what I take on</span></div>
       <a class="work-item" href="/consulting/#how">
         <div class="work-head">
           <span class="work-name">Go-to-market system build</span>
@@ -436,7 +436,7 @@
           <span class="chip">engagement</span>
           <span class="work-arrow">→</span>
         </div>
-        <div class="work-blurb">The buyer's math rebuilt on the margin they actually keep — contribution by segment, break-even by tier, and a holdout test so the lift you claim is the lift you caused.</div>
+        <div class="work-blurb">The buyer's math rebuilt on the margin they actually keep — contribution by segment, break-even by tier, and a holdout test that separates real lift from noise.</div>
       </a>
       <a class="work-item" href="/consulting/#engagement">
         <div class="work-head">
@@ -444,7 +444,7 @@
           <span class="chip">terms</span>
           <span class="work-arrow">→</span>
         </div>
-        <div class="work-blurb">Month to month, two to three days a week, remote. From $5,000/month. Most clients don't have a sales team yet.</div>
+        <div class="work-blurb">Month to month, two to three days a week, remote. From $5,000/month. Built for companies with no sales team yet.</div>
       </a>
     </div>
 
@@ -562,10 +562,23 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
     document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
     try{ localStorage.setItem('jp-view', v); }catch(e){}
   }
-  try{ if(localStorage.getItem('jp-view')==='agent') setView('agent'); }catch(e){}
+  // #contact is a request for the form, which lives inside #human. Honour it over
+  // a saved agent-view preference, or the form opens where nobody can see it.
+  var wantsContact = location.hash === '#contact';
+  try{ if(!wantsContact && localStorage.getItem('jp-view')==='agent') setView('agent'); }catch(e){}
 
-  // /consulting/ and other pages link to /#contact — open the form on arrival.
-  if(location.hash === '#contact'){ window.addEventListener('DOMContentLoaded', function(){ toggleContact(null); }); }
+  // /consulting/ and other pages link to /?from=<page>#contact.
+  if(wantsContact){
+    window.addEventListener('DOMContentLoaded', function(){
+      setView('human');
+      var from = new URLSearchParams(location.search).get('from');
+      if(from){
+        var sel = document.querySelector('select[name="intent"]');
+        if(sel && [].some.call(sel.options, function(o){ return o.value === from; })) sel.value = from;
+      }
+      toggleContact(null);
+    });
+  }
   function copyText(t, btn, label){
     navigator.clipboard.writeText(t).then(function(){
       var old = btn.textContent; btn.textContent = label || 'copied';
@@ -613,7 +626,7 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
       company: el['company'].value.trim(),
       website_url: el['website_url'].value.trim(),
       message: el['message'].value.trim(),
-      source: location.pathname + location.search,
+      source: location.pathname + location.search + (document.referrer ? ' <- ' + document.referrer : ''),
       user_agent: navigator.userAgent
     };
 
