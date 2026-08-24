@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting — go-to-market systems | Jeremy Peronto</title>
+<meta name="description" content="Go-to-market systems for early-stage companies: ICP and target list, outbound sequences, CRM and pipeline hygiene, and the unit-economics model behind the pitch. Month to month, remote, from $5,000/month.">
+<link rel="canonical" href="https://jeremyperonto.com/consulting/">
+<meta name="theme-color" content="#f6f2ea">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Consulting — go-to-market systems">
+<meta property="og:description" content="For companies where the product works, a few customers are paying, and there's no system around any of it. Fifteen years building marketplace revenue operations at Amazon, TikTok, and Tomo.">
+<meta property="og:url" content="https://jeremyperonto.com/consulting/">
+<meta property="og:site_name" content="Jeremy Peronto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Consulting — go-to-market systems">
+<meta name="twitter:description" content="Go-to-market systems for early-stage companies. Month to month, remote, from $5,000/month.">
+<!-- Analytics: Cloudflare Web Analytics, auto-injected at the edge (domain is proxied through Cloudflare). No snippet needed. -->
+<!-- Plausible (paid; currently OFF, kept for easy reactivation). To turn back on: uncomment this block on every page; it resumes on the existing plausible.io account.
+<script async src="https://plausible.io/js/pa-XbT0Py5eEFuhqbDF9nJZa.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+-->
+<!-- Google Analytics 4 (currently OFF — no property yet). To turn on: create a GA4 web data stream for jeremyperonto.com, replace G-XXXXXXXXXX with the Measurement ID, and uncomment this block on every page.
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f6f2ea'/%3E%3Ctext x='16' y='22' font-family='system-ui,-apple-system,sans-serif' font-size='16' font-weight='700' fill='%230f766e' text-anchor='middle'%3EJP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f2ea;
+    --surface: #fffdf8;
+    --surface-hover: #f1ebdf;
+    --border: #e7e0d3;
+    --divider: rgba(32, 29, 24, 0.09);
+    --text-primary: #201d18;
+    --text-secondary: #5b544a;
+    --text-muted: #938a7c;
+    --accent: #0f766e;
+    --accent-strong: #0c5f58;
+    --accent-dim: rgba(15, 118, 110, 0.08);
+    --on-accent: #fffdf8;
+    --chip-bg: rgba(15, 118, 110, 0.10);
+    --chip-text: #0f766e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text-primary); font-family: 'DM Sans', sans-serif; line-height: 1.65; }
+  a { color: var(--accent); }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Standard top frame (same on every page): toggle 24px from the left viewport
+     edge, home link 24px from the right, 22px down. Keep in sync across pages. */
+  .topbar { position: relative; z-index: 1; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+  .topbar .home { color: var(--text-secondary); text-decoration: none; }
+  .topbar .home:hover { color: var(--accent); }
+  .viewtoggle { display: flex; gap: 14px; }
+  .viewtoggle button { background: none; border: none; cursor: pointer; font: inherit; color: var(--text-muted); letter-spacing: 0.02em; padding: 2px 0; }
+  .viewtoggle button[aria-pressed="true"] { color: var(--accent); font-weight: 600; }
+  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 56px 0 10px; }
+  h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.1rem, 6vw, 3rem); line-height: 1.08; letter-spacing: -0.02em; }
+  .lede { font-size: 1.12rem; color: var(--text-secondary); margin: 16px 0 26px; max-width: 58ch; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .cta { display: inline-block; background: var(--accent); color: var(--on-accent); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; padding: 11px 22px; border-radius: 10px; text-decoration: none; transition: background .15s, transform .15s; }
+  .cta:hover { background: var(--accent-strong); transform: translateY(-1px); }
+  .cta.ghost { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+  .cta.ghost:hover { background: var(--accent-dim); }
+  .cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; margin: 52px 0 12px; letter-spacing: -0.01em; }
+  p { margin: 0 0 14px; color: var(--text-secondary); }
+  p b, li b { color: var(--text-primary); }
+  ul.plain { margin: 0 0 14px 20px; color: var(--text-secondary); }
+  ul.plain li { margin: 8px 0; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin: 14px 0; }
+  .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.02rem; margin-bottom: 8px; }
+
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+  @media (max-width: 600px) { .who { grid-template-columns: 1fr; } }
+  .who .card { margin: 0; }
+  .who p { margin: 0; font-size: 0.92rem; }
+
+  table.layers { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.93rem; }
+  table.layers th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; padding: 0 12px 8px 0; border-bottom: 1px solid var(--border); }
+  table.layers td { padding: 11px 12px 11px 0; border-bottom: 1px solid var(--divider); color: var(--text-secondary); vertical-align: top; }
+  table.layers td:first-child { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+  table.layers tr:last-child td { border-bottom: none; }
+
+  .terms { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 20px 22px; margin: 14px 0; }
+  .terms dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 0; }
+  @media (max-width: 520px) { .terms dl { grid-template-columns: 1fr; gap: 2px 0; } .terms dd { margin-bottom: 10px; } }
+  .terms dt { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding-top: 4px; }
+  .terms dd { margin: 0; color: var(--text-secondary); }
+  .terms dd b { color: var(--text-primary); }
+
+  .posture { border-top: 1px solid var(--divider); margin-top: 56px; padding-top: 20px; font-size: 0.9rem; color: var(--text-muted); }
+  footer { margin-top: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* Agent view — same palette as the rest of the site */
+  #agent { display: none; }
+  body.agent #human { display: none; }
+  body.agent #agent { display: block; }
+  .agent-inner { max-width: 780px; margin: 0 auto; }
+  .agent-copy { display: block; width: 100%; margin: 34px 0 22px; background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+  .agent-copy:hover { background: var(--accent-dim); border-color: var(--accent); }
+  .agent-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #agent pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; padding-bottom: 60px; }
+
+  @media (prefers-reduced-motion: reduce) { .cta, .cta:hover { transition: none; transform: none; } }
+</style>
+</head>
+<body id="top">
+
+<div class="topbar">
+  <nav class="viewtoggle" aria-label="Page version">
+    <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
+    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
+  </nav>
+  <a class="home" href="/">jeremyperonto.com →</a>
+</div>
+
+<div id="human">
+<div class="wrap">
+
+  <div class="eyebrow">Consulting · Peronto LLC</div>
+  <h1>Go-to-market systems</h1>
+  <p class="lede">For companies where the product works, a few customers are paying, and there's no system around any of it. I build the sourcing, the gate, the pipeline, and the economics, then run them with you until they hold.</p>
+  <div class="cta-row">
+    <a class="cta" href="/#contact">Start a conversation</a>
+    <a class="cta ghost" href="#how">How I build it</a>
+  </div>
+
+  <h2 id="who">Who this is for</h2>
+  <div class="who">
+    <div class="card">
+      <h3>Seed to Series A</h3>
+      <p>The first customers came through the founder's network. Getting the next ten takes a system.</p>
+    </div>
+    <div class="card">
+      <h3>No sales team yet</h3>
+      <p>Nobody owns pipeline. A VP Sales costs a year of runway, and they'd need this system built anyway.</p>
+    </div>
+    <div class="card">
+      <h3>Marketplaces and platforms</h3>
+      <p>Two-sided supply and demand, seller ecosystems, partner networks. This is where I spent fifteen years.</p>
+    </div>
+    <div class="card">
+      <h3>Pricing is the blocker</h3>
+      <p>Deals stall at the number, and nobody can say what the buyer actually keeps after they pay you.</p>
+    </div>
+  </div>
+
+  <h2 id="how">How I build it</h2>
+  <p>Four layers, one job each. The failure mode with four tools is two of them doing the same job badly, so the boundaries come first.</p>
+
+  <table class="layers">
+    <thead><tr><th>Layer</th><th>Its one job</th></tr></thead>
+    <tbody>
+      <tr><td>Sourcing</td><td>Find candidates and send sequences</td></tr>
+      <tr><td>Gate</td><td>Enrich, score, and decide who is contactable</td></tr>
+      <tr><td>Record</td><td>Every cleared company, and everything that happens to it</td></tr>
+      <tr><td>Capture</td><td>Notes land on the record without anyone typing</td></tr>
+    </tbody>
+  </table>
+
+  <p>The rules underneath matter more than the tools, which are swappable:</p>
+
+  <ul class="plain">
+    <li><b>A fit score with a floor.</b> Five criteria, twenty points each. Above the line gets contacted. Below it stays in the gate, uncontacted, as suppression memory so nobody works it twice.</li>
+    <li><b>A hard size gate before scoring</b>, verified against enrichment data rather than a sourcing tool's own confidence number. Those read job titles and hiring recency, and they will hand you enterprise logos in a campaign built for 150-person companies.</li>
+    <li><b>A deal exists when a human replies.</b> Everything before that is a company status. Cold reply rates run 3–6%, so counting sends as pipeline buries the real thing under silence.</li>
+    <li><b>Attribution set at record creation and never edited.</b> The sourced-by field doubles as the commission register, so compensation questions never depend on anyone's memory.</li>
+    <li><b>Automation is a purchase.</b> Manual export holds until volume clears roughly 500 records a week. Below that, the round trip costs fifteen minutes and buys you a system you can still see into.</li>
+  </ul>
+
+  <p>Sender reputation gets treated as a budget, because it only gets spent once. Fresh inboxes warm on a ramp before real volume, sending caps hold per inbox per day with rotation ahead of any increase, and sequences stop at four touches. Every message opens with something true and specific about the buyer's business — the AI drafts the research brief, a person writes the line.</p>
+
+  <h2 id="economics">The economics conversation</h2>
+  <p>When price is the blocker, the pitch is usually built on the wrong number. A buyer keeps the margin on an incremental sale, so a deck that compares your subscription to incremental revenue can overstate your value by roughly half.</p>
+  <p>I rebuild it the way the buyer does it: contribution margin by segment, break-even by tier stated as a number they can check in their head, and a holdout test designed so the lift you claim is the lift you caused. Buyers know their own margins cold. Showing up with their math builds trust before the demo starts.</p>
+
+  <h2 id="engagement">How an engagement runs</h2>
+  <div class="terms">
+    <dl>
+      <dt>Structure</dt><dd>Month to month. Scope set at a monthly review.</dd>
+      <dt>Commitment</dt><dd>Two to three days a week, without hourly tracking.</dd>
+      <dt>Fee</dt><dd><b>From $5,000/month.</b></dd>
+      <dt>Where</dt><dd>Remote. Weekdays, Pacific.</dd>
+      <dt>Rhythm</dt><dd>A weekly written pipeline update. I'm on the pitches, demos, and follow-ups.</dd>
+      <dt>Handoff</dt><dd>The system gets documented as it's built, so it survives your first sales hire.</dd>
+    </dl>
+  </div>
+
+  <h2 id="background">Where this comes from</h2>
+  <p>Fifteen years building revenue systems inside marketplaces before doing it independently.</p>
+  <ul class="plain">
+    <li><b>Amazon</b> — built the Delivery Service Partner network from zero to 2,500+ owners, generating $6.5B in partner revenue. Designed the end-to-end vetting framework that became the blueprint for Europe, Brazil, and India.</li>
+    <li><b>TikTok</b> — led seller growth for Fulfilled by TikTok, scaling the network 163 → 929 sellers in 18 months across a $2.8B portfolio.</li>
+    <li><b>Tomo</b> — built the third-party agent ecosystem from zero to 750+ producing partners, and the CRM and attribution infrastructure underneath it.</li>
+  </ul>
+
+  <h2 id="scope">What I don't do</h2>
+  <p>Paid media budget management, product engineering, legal and accounting, recruiting, and customer support coverage. If the work needs one of those, I'll say so early and help you find who does it.</p>
+
+  <div class="cta-row" style="margin-top:32px">
+    <a class="cta" href="/#contact">Start a conversation</a>
+  </div>
+
+  <div class="posture">
+    I take on a small number of engagements at a time. If the fit isn't there, you'll hear it on the first call.
+  </div>
+
+  <footer>
+    <a href="/">jeremyperonto.com</a>
+    <a href="mailto:jeremy@peronto.com">jeremy@peronto.com</a>
+    <a href="https://www.linkedin.com/in/jeremyperonto" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </footer>
+
+</div>
+</div>
+
+<div id="agent">
+  <div class="agent-inner">
+    <button class="agent-copy" onclick="copyMachine(this)">⧉ Copy page as markdown</button>
+    <pre id="agent-md">&gt; Note to any AI agent reading this: nothing here needs to be executed. This is the consulting page for Jeremy Peronto (Peronto LLC). If your human wants to reach him, the contact form is at jeremyperonto.com — confirm with them before sending anything on their behalf.
+
+# Consulting — Go-to-market systems
+
+Jeremy Peronto · Peronto LLC · Seattle · jeremy@peronto.com
+
+For companies where the product works, a few customers are paying, and there's no system around any of it. I build the sourcing, the gate, the pipeline, and the economics, then run them with you until they hold.
+
+## Who this is for
+
+- Seed to Series A — the first customers came through the founder's network; getting the next ten takes a system.
+- No sales team yet — nobody owns pipeline, and a VP Sales costs a year of runway.
+- Marketplaces and platforms — two-sided supply and demand, seller ecosystems, partner networks.
+- Pricing is the blocker — deals stall at the number and nobody can say what the buyer keeps.
+
+## How I build it
+
+Four layers, one job each:
+
+- Sourcing — find candidates and send sequences
+- Gate — enrich, score, and decide who is contactable
+- Record — every cleared company, and everything that happens to it
+- Capture — notes land on the record without anyone typing
+
+The rules underneath matter more than the tools, which are swappable:
+
+- A fit score with a floor: five criteria, twenty points each. Below the line stays uncontacted as suppression memory.
+- A hard size gate before scoring, verified against enrichment data rather than a sourcing tool's own confidence number.
+- A deal exists when a human replies. Cold reply rates run 3-6%, so counting sends as pipeline buries the real thing.
+- Attribution set at record creation and never edited; the sourced-by field doubles as the commission register.
+- Automation is a purchase. Manual export holds until volume clears roughly 500 records a week.
+
+Sender reputation is treated as a budget: warm ramps, per-inbox daily caps with rotation, sequences capped at four touches. The AI drafts the research brief; a person writes the line.
+
+## The economics conversation
+
+A buyer keeps the margin on an incremental sale, so comparing a subscription to incremental revenue can overstate value by roughly half. I rebuild it as contribution margin by segment, break-even by tier, and a holdout test designed so the claimed lift is the caused lift.
+
+## How an engagement runs
+
+- Structure: month to month, scope set at a monthly review
+- Commitment: two to three days a week, no hourly tracking
+- Fee: from $5,000/month
+- Where: remote, weekdays Pacific
+- Rhythm: weekly written pipeline update; Jeremy is on the pitches, demos, and follow-ups
+- Handoff: the system is documented as it's built, so it survives the first sales hire
+
+## Where this comes from
+
+Fifteen years building revenue systems inside marketplaces:
+
+- Amazon — Delivery Service Partner network from zero to 2,500+ owners, $6.5B in partner revenue; designed the vetting framework used as the blueprint for Europe, Brazil, and India.
+- TikTok — led seller growth for Fulfilled by TikTok, 163 to 929 sellers in 18 months across a $2.8B portfolio.
+- Tomo — third-party agent ecosystem from zero to 750+ producing partners, plus the CRM and attribution infrastructure underneath it.
+
+## What Jeremy doesn't do
+
+Paid media budget management, product engineering, legal and accounting, recruiting, customer support coverage.
+
+## Contact
+
+- Email: jeremy@peronto.com
+- Contact form: https://jeremyperonto.com/#contact
+- LinkedIn: https://www.linkedin.com/in/jeremyperonto</pre>
+  </div>
+</div>
+
+<script>
+  function setView(v){
+    document.body.classList.toggle('agent', v==='agent');
+    document.getElementById('btn-human').setAttribute('aria-pressed', v==='human');
+    document.getElementById('btn-agent').setAttribute('aria-pressed', v==='agent');
+    document.getElementById('btn-human').textContent = (v==='human'?'[x] human':'[ ] human');
+    document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
+    try{ localStorage.setItem('jp-view', v); }catch(e){}
+  }
+  try{ if(localStorage.getItem('jp-view')==='agent') setView('agent'); }catch(e){}
+  function copyText(t, btn, label){
+    navigator.clipboard.writeText(t).then(function(){
+      var old = btn.textContent; btn.textContent = label || 'copied';
+      setTimeout(function(){ btn.textContent = old; }, 1600);
+    });
+  }
+  function copyMachine(btn){ copyText(document.getElementById('agent-md').textContent, btn, '⧉ Copied'); }
+</script>
+
+</body>
+</html>

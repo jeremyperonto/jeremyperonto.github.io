@@ -4,23 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jeremy Peronto — Marketplace & Revenue Operations Leader</title>
-<meta name="description" content="Jeremy Peronto — marketplace and revenue-operations leader (Amazon, TikTok Shop, Tomo). Fifteen years building zero-to-scale revenue ecosystems. Currently: Consulting, Building tools &amp; Revenue Engines for Operators. Seattle.">
+<meta name="description" content="Jeremy Peronto builds go-to-market systems for early-stage companies — ICP, outbound, CRM, and the unit economics behind the pitch. Fifteen years of marketplace revenue operations at Amazon, TikTok Shop, and Tomo. Consulting from $5,000/month. Seattle.">
 <link rel="canonical" href="https://jeremyperonto.com/">
 <meta name="theme-color" content="#f6f2ea">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Jeremy Peronto — Marketplace & Revenue Operations Leader">
-<meta property="og:description" content="Fifteen years building zero-to-scale marketplaces at Amazon, TikTok Shop, and Tomo. Currently: Consulting, Building tools &amp; Revenue Engines for Operators.">
+<meta property="og:description" content="Go-to-market systems for early-stage companies. Fifteen years building zero-to-scale marketplaces at Amazon, TikTok Shop, and Tomo.">
 <meta property="og:url" content="https://jeremyperonto.com/">
 <meta property="og:site_name" content="Jeremy Peronto">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jeremy Peronto — Marketplace & Revenue Operations Leader">
-<meta name="twitter:description" content="Marketplace & revenue-operations leader (Amazon, TikTok Shop, Tomo). Currently: Consulting, Building tools &amp; Revenue Engines for Operators.">
+<meta name="twitter:description" content="Go-to-market systems for early-stage companies. Marketplace revenue operations at Amazon, TikTok Shop, and Tomo.">
 <!-- Analytics: Cloudflare Web Analytics, auto-injected at the edge (domain is proxied through Cloudflare). No snippet needed. -->
 <!-- Plausible (paid; currently OFF, kept for easy reactivation). To turn back on: uncomment this block on every page; it resumes on the existing plausible.io account.
 <script async src="https://plausible.io/js/pa-XbT0Py5eEFuhqbDF9nJZa.js"></script>
 <script>
   window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
   plausible.init()
+</script>
+-->
+<!-- Google Analytics 4 (currently OFF — no property yet). To turn on: create a GA4 web data stream for jeremyperonto.com, replace both G-XXXXXXXXXX with the Measurement ID, and uncomment this block on every page.
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 -->
 
@@ -117,6 +126,8 @@
     animation: fadeUp 0.6s ease forwards 0.32s;
   }
   .tagline b { color: var(--text-primary); font-weight: 600; }
+  .tagline a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); transition: border-color 0.2s ease; }
+  .tagline a:hover { border-bottom-color: var(--accent); }
 
   .cred {
     font-family: 'JetBrains Mono', monospace;
@@ -183,6 +194,8 @@
   .lead-input::placeholder, .lead-textarea::placeholder { color: var(--text-muted); }
   .lead-input:focus, .lead-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-dim); }
   .lead-textarea { resize: vertical; min-height: 84px; }
+  select.lead-input { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5 6 8l3-3.5' fill='none' stroke='%23938a7c' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 11px center; background-size: 12px; padding-right: 32px; cursor: pointer; }
+  select.lead-input:invalid { color: var(--text-muted); }
   .lead-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
   .lead-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .lead-success { display: none; font-size: 0.9rem; color: var(--text-primary); line-height: 1.6; padding: 10px 0; }
@@ -358,12 +371,12 @@
   <h1 class="name">Jeremy Peronto</h1>
   <p class="tagline">
     <b>Marketplace &amp; revenue-operations leader.</b> Fifteen years building zero-to-scale revenue ecosystems at Amazon, TikTok Shop, and Tomo.<br>
-    Currently: Consulting, Building tools &amp; Revenue Engines for Operators
+    Now: <a href="/consulting/">go-to-market systems for early-stage companies</a>, and building tools for operators.
   </p>
   <p class="cred"><b style="color:var(--text-secondary);font-weight:500">Amazon</b> · <b style="color:var(--text-secondary);font-weight:500">TikTok Shop</b> · <b style="color:var(--text-secondary);font-weight:500">Tomo</b> — 15 years</p>
 
   <div class="contact-row">
-    <button type="button" id="contact-toggle" class="cta" aria-expanded="false" aria-controls="contact-form" onclick="toggleContact(event)">Get in touch <span class="chev">▾</span></button>
+    <button type="button" id="contact-toggle" class="cta" aria-expanded="false" aria-controls="contact-form" onclick="toggleContact(event)">Start a conversation <span class="chev">▾</span></button>
   </div>
 
   <form class="contact-form" id="contact-form" onsubmit="return submitLead(event)">
@@ -376,7 +389,16 @@
         <div class="lead-field"><input class="lead-input" type="text" name="company" placeholder="Company (optional)" aria-label="Company" autocomplete="organization"></div>
         <div class="lead-field"><input class="lead-input" type="url" name="website_url" placeholder="Website (optional)" aria-label="Website"></div>
       </div>
-      <div class="lead-field"><textarea class="lead-textarea" name="message" placeholder="What's on your mind?" aria-label="Message" required></textarea></div>
+      <div class="lead-field">
+        <select class="lead-input" name="intent" aria-label="Reason for reaching out" required>
+          <option value="">What's this about?</option>
+          <option value="consulting">A consulting engagement</option>
+          <option value="role">A role</option>
+          <option value="tools">Walk the Store or Cognicard</option>
+          <option value="other">Something else</option>
+        </select>
+      </div>
+      <div class="lead-field"><textarea class="lead-textarea" name="message" placeholder="What are you working on, and what's in the way?" aria-label="Message" required></textarea></div>
       <input class="lead-hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="lead-actions">
         <button type="submit" class="cta lead-submit">Send <span>→</span></button>
@@ -399,13 +421,41 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       Email
     </a>
-    <a href="/resume/" class="link resume">
+    <a href="/resume/" class="link resume" aria-label="Background and résumé">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg>
-      Résumé
+      Background
     </a>
   </div>
 
   <div class="stack">
+    <div class="zone">
+      <div class="zone-header">Consulting <span class="zone-sub">what I do for clients</span></div>
+      <a class="work-item" href="/consulting/#how">
+        <div class="work-head">
+          <span class="work-name">Go-to-market system build</span>
+          <span class="chip">engagement</span>
+          <span class="work-arrow">→</span>
+        </div>
+        <div class="work-blurb">ICP and target list, outbound sequences, CRM and pipeline hygiene. I write the sequences, stand up the system of record, and sit on the demos and follow-ups.</div>
+      </a>
+      <a class="work-item" href="/consulting/#economics">
+        <div class="work-head">
+          <span class="work-name">Pricing and unit economics</span>
+          <span class="chip">engagement</span>
+          <span class="work-arrow">→</span>
+        </div>
+        <div class="work-blurb">The buyer's math rebuilt on the margin they actually keep — contribution by segment, break-even by tier, and a holdout test so the lift you claim is the lift you caused.</div>
+      </a>
+      <a class="work-item" href="/consulting/#engagement">
+        <div class="work-head">
+          <span class="work-name">How an engagement runs</span>
+          <span class="chip">terms</span>
+          <span class="work-arrow">→</span>
+        </div>
+        <div class="work-blurb">Month to month, two to three days a week, remote. From $5,000/month. Most clients don't have a sales team yet.</div>
+      </a>
+    </div>
+
     <div class="zone">
       <div class="zone-header">Work &amp; products <span class="zone-sub">what I'm building</span></div>
       <a class="work-item" href="/walk-the-store/">
@@ -476,7 +526,7 @@
 # Jeremy Peronto
 
 Marketplace and revenue-operations leader. Fifteen years building zero-to-scale revenue ecosystems at Amazon, TikTok Shop, and Tomo.
-Currently: Consulting, Building tools &amp; Revenue Engines for Operators. Based in Seattle.
+Now: go-to-market systems for early-stage companies (https://jeremyperonto.com/consulting/), and building tools for operators. Based in Seattle.
 
 ## Contact
 
@@ -484,6 +534,14 @@ Currently: Consulting, Building tools &amp; Revenue Engines for Operators. Based
 - LinkedIn: https://www.linkedin.com/in/jeremyperonto
 - GitHub: https://github.com/jeremyperonto
 - Résumé: https://jeremyperonto.com/resume/
+
+## Consulting
+
+Go-to-market systems for early-stage companies: ICP and target list, outbound sequences, CRM and pipeline hygiene, and the unit-economics model behind the pitch. Month to month, two to three days a week, remote, from $5,000/month. Full detail at https://jeremyperonto.com/consulting/
+
+- Go-to-market system build — sourcing, gate, pipeline, and the rules that keep them from overlapping.
+- Pricing and unit economics — contribution margin by segment, break-even by tier, holdout test design.
+- How an engagement runs — https://jeremyperonto.com/consulting/#engagement
 
 ## Work &amp; products
 
@@ -513,6 +571,9 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
     try{ localStorage.setItem('jp-view', v); }catch(e){}
   }
   try{ if(localStorage.getItem('jp-view')==='agent') setView('agent'); }catch(e){}
+
+  // /consulting/ and other pages link to /#contact — open the form on arrival.
+  if(location.hash === '#contact'){ window.addEventListener('DOMContentLoaded', function(){ toggleContact(null); }); }
   function copyText(t, btn, label){
     navigator.clipboard.writeText(t).then(function(){
       var old = btn.textContent; btn.textContent = label || 'copied';
@@ -530,6 +591,7 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
     btn.classList.toggle('open', open);
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if(open){
+      if(window.gtag) gtag('event', 'contact_opened');
       var first = f.querySelector('input[name="name"]');
       setTimeout(function(){
         f.scrollIntoView({behavior: 'smooth', block: 'nearest'});
@@ -555,6 +617,7 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
     var payload = {
       name: el['name'].value.trim(),
       email: el['email'].value.trim(),
+      intent: el['intent'].value,
       company: el['company'].value.trim(),
       website_url: el['website_url'].value.trim(),
       message: el['message'].value.trim(),
@@ -583,6 +646,7 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
     }).then(function(r){
       if(!r.ok) throw new Error('bad status');
       f.classList.add('sent');
+      if(window.gtag) gtag('event', 'generate_lead', {intent: payload.intent, source: payload.source});
     }).catch(function(){
       err.style.display = 'block';
       if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
