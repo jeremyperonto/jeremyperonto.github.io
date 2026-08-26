@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" role="img" aria-label="Peronto LLC">
+  <title>Peronto LLC</title>
+  <rect width="600" height="600" fill="#0f766e"/>
+  <!-- x is 292 rather than 300: a P is left-weighted in ink, so centring its
+       advance width leaves it sitting optically right of centre. -->
+  <text x="292" y="300"
+        text-anchor="middle" dominant-baseline="central"
+        font-family="'Space Grotesk', 'Helvetica Neue', Arial, sans-serif"
+        font-weight="700" font-size="360" fill="#f6f2ea">P</text>
+</svg>
