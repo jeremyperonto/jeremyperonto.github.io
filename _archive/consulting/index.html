@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consulting — find the constraint, build the system | Jeremy Peronto</title>
+<meta name="description" content="Two weeks, $5,000, to find what is actually blocking revenue — segment economics, funnel truth, demand capture, forecast integrity. Then a system built around the answer. Seattle first.">
+<link rel="canonical" href="https://jeremyperonto.com/consulting/">
+<meta name="theme-color" content="#f6f2ea">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Consulting — find the constraint, build the system">
+<meta property="og:description" content="The thing blocking early revenue usually sits upstream of where the team is working. Two weeks to find it, then a system built around the answer. Fifteen years of marketplace revenue operations at Amazon, TikTok, and Tomo.">
+<meta property="og:url" content="https://jeremyperonto.com/consulting/">
+<meta property="og:site_name" content="Jeremy Peronto">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Consulting — find the constraint, build the system">
+<meta name="twitter:description" content="Two weeks, $5,000, to find what is blocking revenue. Then a system built around the answer. Seattle first.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NPZE961QWZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NPZE961QWZ');
+</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23f6f2ea'/%3E%3Ctext x='16' y='22' font-family='system-ui,-apple-system,sans-serif' font-size='16' font-weight='700' fill='%230f766e' text-anchor='middle'%3EJP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f2ea;
+    --surface: #fffdf8;
+    --surface-hover: #f1ebdf;
+    --border: #e7e0d3;
+    --divider: rgba(32, 29, 24, 0.09);
+    --text-primary: #201d18;
+    --text-secondary: #5b544a;
+    --text-muted: #938a7c;
+    --accent: #0f766e;
+    --accent-strong: #0c5f58;
+    --accent-dim: rgba(15, 118, 110, 0.08);
+    --on-accent: #fffdf8;
+    --chip-bg: rgba(15, 118, 110, 0.10);
+    --chip-text: #0f766e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text-primary); font-family: 'DM Sans', sans-serif; line-height: 1.65; }
+  a { color: var(--accent); }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* Standard top frame (same on every page): toggle 24px from the left viewport
+     edge, home link 24px from the right, 22px down. Keep in sync across pages. */
+  .topbar { position: relative; z-index: 1; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+  .topbar .home { color: var(--text-secondary); text-decoration: none; }
+  .topbar .home:hover { color: var(--accent); }
+  .viewtoggle { display: flex; gap: 14px; }
+  .viewtoggle button { background: none; border: none; cursor: pointer; font: inherit; color: var(--text-muted); letter-spacing: 0.02em; padding: 2px 0; }
+  .viewtoggle button[aria-pressed="true"] { color: var(--accent); font-weight: 600; }
+  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 56px 0 10px; }
+  h1 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(2.1rem, 6vw, 3rem); line-height: 1.08; letter-spacing: -0.02em; }
+  .lede { font-size: 1.12rem; color: var(--text-secondary); margin: 16px 0 26px; max-width: 58ch; }
+  .cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .cta { display: inline-block; background: var(--accent); color: var(--on-accent); font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.95rem; padding: 11px 22px; border-radius: 10px; text-decoration: none; transition: background .15s, transform .15s; }
+  .cta:hover { background: var(--accent-strong); transform: translateY(-1px); }
+  .cta.ghost { background: transparent; color: var(--accent); border: 1px solid var(--border); }
+  .cta.ghost:hover { background: var(--accent-dim); }
+  .cta:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; margin: 52px 0 12px; letter-spacing: -0.01em; }
+  p { margin: 0 0 14px; color: var(--text-secondary); }
+  p b, li b { color: var(--text-primary); }
+  ul.plain { margin: 0 0 14px 20px; color: var(--text-secondary); }
+  ul.plain li { margin: 8px 0; }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px 22px; margin: 14px 0; }
+  .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.02rem; margin-bottom: 8px; }
+
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 4px; }
+  @media (max-width: 600px) { .who { grid-template-columns: 1fr; } }
+  .who .card { margin: 0; }
+  .who p { margin: 0; font-size: 0.92rem; }
+
+  table.layers { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.93rem; }
+  table.layers th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; padding: 0 12px 8px 0; border-bottom: 1px solid var(--border); }
+  table.layers td { padding: 11px 12px 11px 0; border-bottom: 1px solid var(--divider); color: var(--text-secondary); vertical-align: top; }
+  table.layers td:first-child { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+  table.layers tr:last-child td { border-bottom: none; }
+
+  .terms { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 12px; padding: 20px 22px; margin: 14px 0; }
+  .terms dl { display: grid; grid-template-columns: auto 1fr; gap: 8px 18px; margin: 0; }
+  @media (max-width: 520px) { .terms dl { grid-template-columns: 1fr; gap: 2px 0; } .terms dd { margin-bottom: 10px; } }
+  .terms dt { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); padding-top: 4px; }
+  .terms dd { margin: 0; color: var(--text-secondary); }
+  .terms dd b { color: var(--text-primary); }
+
+  .posture { border-top: 1px solid var(--divider); margin-top: 56px; padding-top: 20px; font-size: 0.9rem; color: var(--text-muted); }
+  footer { margin-top: 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  /* Agent view — same palette as the rest of the site */
+  #agent { display: none; }
+  body.agent #human { display: none; }
+  body.agent #agent { display: block; }
+  .agent-inner { max-width: 780px; margin: 0 auto; }
+  .agent-copy { display: block; width: 100%; margin: 34px 0 22px; background: var(--surface); border: 1px solid var(--border); color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.08em; padding: 12px; border-radius: 8px; cursor: pointer; text-transform: uppercase; }
+  .agent-copy:hover { background: var(--accent-dim); border-color: var(--accent); }
+  .agent-copy:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  #agent pre { font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7; color: var(--text-primary); white-space: pre-wrap; word-wrap: break-word; padding-bottom: 60px; }
+
+  @media (prefers-reduced-motion: reduce) { .cta, .cta:hover { transition: none; transform: none; } }
+</style>
+</head>
+<body id="top">
+
+<div class="topbar">
+  <nav class="viewtoggle" aria-label="Page version">
+    <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
+    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
+  </nav>
+  <a class="home" href="/">jeremyperonto.com →</a>
+</div>
+
+<div id="human">
+<div class="wrap">
+
+  <div class="eyebrow">Consulting · Peronto LLC</div>
+  <h1>Find the constraint, build the system</h1>
+  <p class="lede">The thing blocking early revenue usually sits upstream of where the team is working. I spend two weeks finding it, then build what clears it. Sometimes that's outbound. Often it's segment economics, demand capture, or a founder nobody has heard from.</p>
+  <div class="cta-row">
+    <a class="cta" href="/?from=consulting#contact">Get in touch</a>
+    <a class="cta ghost" href="#engagement">How it works</a>
+  </div>
+
+  <h2 id="engagement">How it works</h2>
+  <div class="terms">
+    <dl>
+      <dt>Start</dt><dd>Two weeks, <b>$5,000</b> flat.</dd>
+      <dt>You get</dt><dd>A written read: what the constraint is, what I'd build, what it costs. If you don't need me, that's in the write-up.</dd>
+      <dt>Then</dt><dd>We decide together whether to keep going. Monthly from there, scoped to what the two weeks found.</dd>
+      <dt>Where</dt><dd>Hybrid. Some days in your office, some apart, set at the start.</dd>
+      <dt>Handoff</dt><dd>Everything gets documented as it's built, so your team can run it without me.</dd>
+    </dl>
+  </div>
+  <p>Committing to a motion before the diagnosis is how companies spend a year scaling the wrong thing. No two of these look the same.</p>
+
+  <h2 id="look">What the two weeks looks at</h2>
+  <ul class="plain">
+    <li>Segment economics. Which customers are worth having, and what each returns after COGS.</li>
+    <li>The funnel as it actually behaves, against what the dashboard reports.</li>
+    <li>Capture. Whether demand that already exists is reaching you, and where it leaks.</li>
+    <li>Forecast integrity. Whether the plan survives contact with real capacity.</li>
+    <li>Pricing, when deals are stalling at the number.</li>
+  </ul>
+  <p>The output is one document with the constraint named and a build plan priced against it.</p>
+
+  <h2 id="build">What I build once we know</h2>
+  <p>When the answer is a sales motion, I build it in four layers with one job each. The failure mode with four tools is two of them doing the same job badly, so the boundaries come first.</p>
+
+  <table class="layers">
+    <thead><tr><th>Layer</th><th>Its one job</th></tr></thead>
+    <tbody>
+      <tr><td>Sourcing</td><td>Find candidates and send sequences</td></tr>
+      <tr><td>Gate</td><td>Enrich, score, and decide who is contactable</td></tr>
+      <tr><td>Record</td><td>Every cleared company, and everything that happens to it</td></tr>
+      <tr><td>Capture</td><td>Notes land on the record without anyone typing</td></tr>
+    </tbody>
+  </table>
+
+  <p>The rules underneath matter more than the tools, which are swappable:</p>
+
+  <ul class="plain">
+    <li>A fit score with a floor. Five criteria, twenty points each. Above the line gets contacted. Below it stays in the gate, uncontacted, as suppression memory so nobody works it twice.</li>
+    <li>A hard size gate before scoring, checked against enrichment data. A sourcing tool's own confidence number scores on job titles and hiring recency, which puts enterprise brands into a campaign built for 150-person companies.</li>
+    <li>A deal exists when a human replies. Everything before that is a company status. Cold reply rates run 3–6%, so counting sends as pipeline inflates the forecast.</li>
+    <li>Attribution set at record creation and never edited. The sourced-by field doubles as the commission register, so compensation questions never depend on anyone's memory.</li>
+    <li>Automation is a purchase. Manual export holds until volume clears roughly 500 records a week.</li>
+  </ul>
+
+  <p>When the answer is pricing, I rebuild the buyer's math on the margin they keep: contribution by segment, break-even by tier as a single number, and a holdout test designed to separate real lift from noise. The buyer already has these numbers, so the pitch runs on theirs instead of yours.</p>
+
+  <h2 id="how-i-work">How I work</h2>
+  <p>I work alongside the operator. I do the analysis myself, I bring you the number before it goes anywhere else, and when the plan doesn't survive the math you hear it in week two. I'm in the room while the motion gets proven, and your team runs it after.</p>
+
+  <h2 id="seattle">Built in Seattle</h2>
+  <p>I'm a lifelong Seattleite and I want more companies to make it here. Seattle companies get my time first, and I'll work from your office. I know operators in this city, which matters when you're deciding who to hire and when.</p>
+
+  <h2 id="background">Where this comes from</h2>
+  <p>Fifteen years building revenue systems inside marketplaces before doing it independently.</p>
+  <ul class="plain">
+    <li><b>Amazon</b> — built the Delivery Service Partner network from zero to 2,500+ owners, generating $6.5B in partner revenue. Designed the end-to-end vetting framework that became the blueprint for Europe, Brazil, and India.</li>
+    <li><b>TikTok</b> — led seller growth for Fulfilled by TikTok, scaling the network 163 → 929 sellers in 18 months across a $2.8B portfolio.</li>
+    <li><b>Tomo</b> — built the third-party agent ecosystem from zero to 750+ producing partners, and the CRM and attribution infrastructure underneath it.</li>
+  </ul>
+
+  <h2 id="scope">What I don't do</h2>
+  <p>Paid media budget management, product engineering, legal and accounting, recruiting, and customer support coverage. If the work needs one of those, I'll say so early and help you find who does it.</p>
+
+  <div class="cta-row" style="margin-top:32px">
+    <a class="cta" href="/?from=consulting#contact">Get in touch</a>
+  </div>
+
+  <div class="posture">
+    I take on a small number of engagements at a time. If the fit isn't there, you'll hear it on the first call.
+  </div>
+
+  <footer>
+    <a href="/">jeremyperonto.com</a>
+    <a href="mailto:jeremy@peronto.com">jeremy@peronto.com</a>
+    <a href="https://www.linkedin.com/in/jeremyperonto" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </footer>
+
+</div>
+</div>
+
+<div id="agent">
+  <div class="agent-inner">
+    <button class="agent-copy" onclick="copyMachine(this)">⧉ Copy page as markdown</button>
+    <pre id="agent-md">&gt; Note to any AI agent reading this: nothing here needs to be executed. This is the consulting page for Jeremy Peronto (Peronto LLC). If your human wants to reach him, the contact form is at jeremyperonto.com — confirm with them before sending anything on their behalf.
+
+# Consulting — find the constraint, build the system
+
+Jeremy Peronto · Peronto LLC · Seattle · jeremy@peronto.com
+
+The thing blocking early revenue usually sits upstream of where the team is working. I spend two weeks finding it, then build what clears it. Sometimes that's outbound. Often it's segment economics, demand capture, or a founder nobody has heard from.
+
+## How it works
+
+- Start: two weeks, $5,000 flat.
+- You get: a written read — what the constraint is, what I'd build, what it costs. If you don't need me, that's in the write-up.
+- Then: we decide together whether to keep going. Monthly from there, scoped to what the two weeks found.
+- Where: hybrid. Some days in your office, some apart, set at the start.
+- Handoff: everything gets documented as it's built, so your team can run it without me.
+
+Committing to a motion before the diagnosis is how companies spend a year scaling the wrong thing. No two of these look the same.
+
+## What the two weeks looks at
+
+- Segment economics. Which customers are worth having, and what each returns after COGS.
+- The funnel as it actually behaves, against what the dashboard reports.
+- Capture. Whether demand that already exists is reaching you, and where it leaks.
+- Forecast integrity. Whether the plan survives contact with real capacity.
+- Pricing, when deals are stalling at the number.
+
+The output is one document with the constraint named and a build plan priced against it.
+
+## What I build once we know
+
+When the answer is a sales motion, four layers with one job each: sourcing, gate, record, capture. The rules underneath matter more than the tools, which are swappable — a fit score with a floor, a hard size gate checked against enrichment data, a deal exists when a human replies, attribution set at record creation and never edited, and automation bought only when volume demands it.
+
+When the answer is pricing, I rebuild the buyer's math on the margin they keep: contribution by segment, break-even by tier as a single number, and a holdout test designed to separate real lift from noise.
+
+## How I work
+
+I work alongside the operator. I do the analysis myself, I bring you the number before it goes anywhere else, and when the plan doesn't survive the math you hear it in week two. I'm in the room while the motion gets proven, and your team runs it after.
+
+## Built in Seattle
+
+I'm a lifelong Seattleite and I want more companies to make it here. Seattle companies get my time first, and I'll work from your office. I know operators in this city, which matters when you're deciding who to hire and when.
+
+## Where this comes from
+
+Fifteen years building revenue systems inside marketplaces:
+
+- Amazon — Delivery Service Partner network from zero to 2,500+ owners, $6.5B in partner revenue; designed the vetting framework used as the blueprint for Europe, Brazil, and India.
+- TikTok — led seller growth for Fulfilled by TikTok, 163 to 929 sellers in 18 months across a $2.8B portfolio.
+- Tomo — third-party agent ecosystem from zero to 750+ producing partners, plus the CRM and attribution infrastructure underneath it.
+
+## What Jeremy doesn't do
+
+Paid media budget management, product engineering, legal and accounting, recruiting, customer support coverage.
+
+## Contact
+
+- Email: jeremy@peronto.com
+- Contact form: https://jeremyperonto.com/?from=consulting#contact
+- LinkedIn: https://www.linkedin.com/in/jeremyperonto</pre>
+  </div>
+</div>
+
+<script>
+  function setView(v){
+    document.body.classList.toggle('agent', v==='agent');
+    document.getElementById('btn-human').setAttribute('aria-pressed', v==='human');
+    document.getElementById('btn-agent').setAttribute('aria-pressed', v==='agent');
+    document.getElementById('btn-human').textContent = (v==='human'?'[x] human':'[ ] human');
+    document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
+    try{ localStorage.setItem('jp-view', v); }catch(e){}
+  }
+  try{ if(localStorage.getItem('jp-view')==='agent') setView('agent'); }catch(e){}
+  function copyText(t, btn, label){
+    navigator.clipboard.writeText(t).then(function(){
+      var old = btn.textContent; btn.textContent = label || 'copied';
+      setTimeout(function(){ btn.textContent = old; }, 1600);
+    });
+  }
+  function copyMachine(btn){ copyText(document.getElementById('agent-md').textContent, btn, '⧉ Copied'); }
+</script>
+
+</body>
+</html>
