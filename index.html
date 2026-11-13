@@ -60,11 +60,11 @@
 
   /* Standard top frame (same on every page): toggle 24px from the left viewport
      edge, home link 24px from the right, 22px down. Keep in sync across pages. */
-  .topbar { position: relative; z-index: 2; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 22px 24px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
-  .viewtoggle { display: flex; gap: 14px; }
-  .viewtoggle button { background: none; border: none; cursor: pointer; font: inherit; color: var(--soft); letter-spacing: 0.02em; padding: 2px 0; }
-  .viewtoggle button[aria-pressed="true"] { color: var(--accent); font-weight: 600; }
-  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .topbar { position: relative; z-index: 2; width: 100%; max-width: 820px; margin: 0 auto; display: flex; justify-content: flex-end; align-items: center; padding: 18px 24px 0; }
+  .viewtoggle { display: inline-flex; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.78rem; font-weight: 600; }
+  .viewtoggle button { appearance: none; background: none; border: none; cursor: pointer; font: inherit; color: var(--soft); padding: 6px 12px; border-radius: 999px; line-height: 1; transition: background 0.15s ease, color 0.15s ease; }
+  .viewtoggle button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   #human { position: relative; overflow: hidden; }
   #agent { display: none; }
@@ -206,6 +206,7 @@
   @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
   @media (max-width: 640px) {
+    .topbar { padding: 14px 20px 0; }
     .content { padding: 36px 20px 80px; }
     .lead-row { flex-direction: column; gap: 0; }
     .cta { width: 100%; justify-content: center; }
@@ -221,8 +222,8 @@
 
 <div class="topbar">
   <nav class="viewtoggle" aria-label="Page version">
-    <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
-    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
+    <button id="btn-human" aria-pressed="true" onclick="setView('human')">Human</button>
+    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">Agent</button>
   </nav>
 </div>
 
@@ -235,7 +236,7 @@
       <p class="where">Seattle, Washington</p>
       <div class="bio">
         <p>Director, PSA Vault Growth at <a href="https://www.collectors.com/" target="_blank" rel="noopener noreferrer">Collectors</a>. Before that, fifteen years building zero-to-scale revenue ecosystems at Amazon, TikTok Shop, and Tomo.</p>
-        <p>Nights and weekends I build things, and the finished ones live here. All of it is free, and the code is on <a href="https://github.com/jeremyperonto" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+        <p>Nights and weekends I build things, and the finished ones are published here. All of it is free, and the code is on <a href="https://github.com/jeremyperonto" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
         <p>Husband, father, and lifelong Seattleite. Off the clock: the <a href="https://jeremyperonto.com/MarinersMeter/">Mariners</a>, long runs, and <a href="https://www.goodreads.com/jeremyperonto" target="_blank" rel="noopener noreferrer">reading</a>.</p>
       </div>
     </div>
@@ -325,7 +326,7 @@
 
 Director, PSA Vault Growth at Collectors (https://www.collectors.com/). Before that, fifteen years building zero-to-scale revenue ecosystems at Amazon, TikTok Shop, and Tomo. Based in Seattle.
 
-Nights and weekends I build things, and the finished ones are listed below. All of it is free, and the code is on GitHub.
+Nights and weekends I build things, and the finished ones are published here. All of it is free, and the code is on GitHub.
 
 ## Contact
 
@@ -365,8 +366,6 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
     document.body.classList.toggle('agent', v==='agent');
     document.getElementById('btn-human').setAttribute('aria-pressed', v==='human');
     document.getElementById('btn-agent').setAttribute('aria-pressed', v==='agent');
-    document.getElementById('btn-human').textContent = (v==='human'?'[x] human':'[ ] human');
-    document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
     try{ localStorage.setItem('jp-view', v); }catch(e){}
   }
   // #contact asks for the form, which lives inside #human. Honour it over a saved

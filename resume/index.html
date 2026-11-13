@@ -162,10 +162,10 @@
   footer.foot a { color: var(--text-secondary); text-decoration: none; }
   footer.foot a:hover { color: var(--accent); }
 
-  .viewtoggle { display: flex; gap: 14px; }
-  .viewtoggle button { background: none; border: none; cursor: pointer; font: inherit; color: var(--text-muted); letter-spacing: 0.02em; padding: 2px 0; }
-  .viewtoggle button[aria-pressed="true"] { color: var(--accent); font-weight: 600; }
-  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .viewtoggle { display: inline-flex; padding: 3px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); font-family: 'DM Sans', system-ui, sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0; }
+  .viewtoggle button { appearance: none; background: none; border: none; cursor: pointer; font: inherit; color: var(--text-muted); padding: 6px 12px; border-radius: 999px; line-height: 1; transition: background 0.15s ease, color 0.15s ease; }
+  .viewtoggle button[aria-pressed="true"] { background: var(--text-primary); color: var(--surface); }
+  .viewtoggle button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .nav-right { display: flex; align-items: center; gap: 16px; }
   #agent { display: none; }
   body.agent #human { display: none; }
@@ -210,8 +210,8 @@
 
 <div class="topbar">
   <nav class="viewtoggle" aria-label="Page version">
-    <button id="btn-human" aria-pressed="true" onclick="setView('human')">[x] human</button>
-    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">[ ] agent</button>
+    <button id="btn-human" aria-pressed="true" onclick="setView('human')">Human</button>
+    <button id="btn-agent" aria-pressed="false" onclick="setView('agent')">Agent</button>
   </nav>
   <a class="home" href="/">jeremyperonto.com →</a>
 </div>
@@ -434,8 +434,6 @@ Revenue Planning &amp; Forecasting · Incentive Design · Marketplace Strategy �
     document.body.classList.toggle('agent', v==='agent');
     document.getElementById('btn-human').setAttribute('aria-pressed', v==='human');
     document.getElementById('btn-agent').setAttribute('aria-pressed', v==='agent');
-    document.getElementById('btn-human').textContent = (v==='human'?'[x] human':'[ ] human');
-    document.getElementById('btn-agent').textContent = (v==='agent'?'[x] agent':'[ ] agent');
     try{ localStorage.setItem('resume-view', v); }catch(e){}
   }
   try{ if(localStorage.getItem('resume-view')==='agent') setView('agent'); }catch(e){}
