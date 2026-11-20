@@ -198,6 +198,9 @@
   .lead-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .lead-success { display: none; font-size: 1rem; color: var(--ink); line-height: 1.6; padding: 10px 0; }
   .lead-error { display: none; font-size: 0.85rem; color: #b3261e; margin-top: 8px; }
+  .lead-fine { font-size: 0.8rem; color: var(--soft); margin: 0; }
+  .lead-fine a { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+  .lead-fine a:hover { color: var(--accent); text-decoration-color: var(--accent); }
   .contact-form.sent .lead-body { display: none; }
   .contact-form.sent .lead-success { display: block; }
 
@@ -307,8 +310,10 @@
           </div>
           <div class="lead-field"><textarea class="lead-textarea" name="message" placeholder="What's on your mind?" aria-label="Message" required></textarea></div>
           <input class="lead-hp" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div id="cf-turnstile"></div>
           <div class="lead-actions">
             <button type="submit" class="cta lead-submit">Send</button>
+            <p class="lead-fine">Spam check by <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener">Cloudflare Turnstile</a>.</p>
           </div>
           <div class="lead-error" id="lead-error">Couldn't send. Please email jeremy@peronto.com instead.</div>
         </div>
@@ -400,6 +405,8 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
     btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if(open){
       if(window.gtag) gtag('event', 'contact_opened');
+      if(!formOpenedAt) formOpenedAt = Date.now();
+      loadTurnstile();
       var first = f.querySelector('input[name="name"]');
       setTimeout(function(){
         f.scrollIntoView({behavior: 'smooth', block: 'nearest'});
@@ -411,6 +418,53 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
 
   // Supabase Edge Function endpoint. Empty → the form falls back to email.
   var LEAD_ENDPOINT = 'https://bvaryucxwnngacigqoeo.supabase.co/functions/v1/lead';
+
+  // Cloudflare Turnstile, invisible mode. The script loads the first time the
+  // form opens and the token is usually ready before anyone finishes typing.
+  // If it can't load or can't verify (blockers, old browsers), the form falls
+  // back to the visitor's mail client, the same path as an unwired endpoint.
+  var TURNSTILE_SITEKEY = '0x4AAAAAAGKkK_Uyq8FfnZK7';
+  var tsState = 'idle', tsToken = '', tsWidget = null, formOpenedAt = 0;
+
+  function loadTurnstile(){
+    if(tsState !== 'idle') return;
+    tsState = 'loading';
+    window.onTurnstileLoad = function(){
+      try {
+        tsWidget = turnstile.render('#cf-turnstile', {
+          sitekey: TURNSTILE_SITEKEY,
+          callback: function(t){ tsToken = t; tsState = 'ready'; },
+          'error-callback': function(){ tsState = 'failed'; return true; },
+          'timeout-callback': function(){ tsState = 'failed'; },
+          'expired-callback': function(){ tsToken = ''; tsState = 'loading'; turnstile.reset(tsWidget); }
+        });
+      } catch(e){ tsState = 'failed'; }
+    };
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad&render=explicit';
+    s.async = true; s.defer = true;
+    s.onerror = function(){ tsState = 'failed'; };
+    document.head.appendChild(s);
+  }
+
+  // Resolves with a token, or '' if Turnstile failed or took longer than maxMs.
+  function waitForToken(maxMs){
+    return new Promise(function(resolve){
+      var started = Date.now();
+      (function tick(){
+        if(tsState === 'ready' && tsToken) return resolve(tsToken);
+        if(tsState === 'failed' || tsState === 'idle' || Date.now() - started > maxMs) return resolve('');
+        setTimeout(tick, 150);
+      })();
+    });
+  }
+
+  function mailFallback(payload){
+    var body = payload.message + '\n\n' + payload.name;
+    window.location.href = 'mailto:' + atob('amVyZW15QHBlcm9udG8uY29t') +
+      '?subject=' + encodeURIComponent('Hello from jeremyperonto.com') +
+      '&body=' + encodeURIComponent(body);
+  }
 
   function submitLead(e){
     e.preventDefault();
@@ -431,32 +485,41 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
       email: el['email'].value.trim(),
       message: (reason ? '[' + reason + '] ' : '') + el['message'].value.trim(),
       source: location.pathname + location.search + (document.referrer ? ' <- ' + document.referrer : ''),
-      user_agent: navigator.userAgent
+      user_agent: navigator.userAgent,
+      elapsed_ms: formOpenedAt ? Date.now() - formOpenedAt : 0
     };
 
     var btn = f.querySelector('.lead-submit');
 
     if(!LEAD_ENDPOINT){
       // Endpoint not wired. Never leave the form a dead end.
-      var body = payload.message + '\n\n' + payload.name;
-      window.location.href = 'mailto:' + atob('amVyZW15QHBlcm9udG8uY29t') +
-        '?subject=' + encodeURIComponent('Hello from jeremyperonto.com') +
-        '&body=' + encodeURIComponent(body);
+      mailFallback(payload);
       return false;
     }
 
     if(btn){ btn.disabled = true; btn.style.opacity = '0.6'; }
-    fetch(LEAD_ENDPOINT, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(payload)
-    }).then(function(r){
-      if(!r.ok) throw new Error('bad status');
-      f.classList.add('sent');
-      if(window.gtag) gtag('event', 'generate_lead', {intent: sel.value, source: payload.source});
+    waitForToken(8000).then(function(token){
+      if(!token){
+        // Turnstile unavailable here. Hand off to email rather than fail.
+        if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+        mailFallback(payload);
+        return;
+      }
+      payload.turnstile_token = token;
+      return fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      }).then(function(r){
+        if(!r.ok) throw new Error('bad status');
+        f.classList.add('sent');
+        if(window.gtag) gtag('event', 'generate_lead', {intent: sel.value, source: payload.source});
+      });
     }).catch(function(){
       err.style.display = 'block';
       if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+      // Tokens are single-use; fetch a fresh one for the retry.
+      if(tsWidget !== null){ tsToken = ''; tsState = 'loading'; try { turnstile.reset(tsWidget); } catch(e){} }
     });
     return false;
   }
