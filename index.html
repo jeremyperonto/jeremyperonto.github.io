@@ -497,11 +497,14 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
       return false;
     }
 
-    if(btn){ btn.disabled = true; btn.style.opacity = '0.6'; }
-    waitForToken(8000).then(function(token){
+    // The invisible check can take ten to twenty seconds on a slow connection;
+    // the button says so while it waits.
+    var btnLabel = btn ? btn.textContent : '';
+    if(btn){ btn.disabled = true; btn.style.opacity = '0.6'; btn.textContent = 'Sending…'; }
+    waitForToken(25000).then(function(token){
       if(!token){
         // Turnstile unavailable here. Hand off to email rather than fail.
-        if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+        if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.textContent = btnLabel; }
         mailFallback(payload);
         return;
       }
@@ -517,7 +520,7 @@ Husband, father, and lifelong Seattleite. Off the clock: the Mariners, long runs
       });
     }).catch(function(){
       err.style.display = 'block';
-      if(btn){ btn.disabled = false; btn.style.opacity = '1'; }
+      if(btn){ btn.disabled = false; btn.style.opacity = '1'; btn.textContent = btnLabel; }
       // Tokens are single-use; fetch a fresh one for the retry.
       if(tsWidget !== null){ tsToken = ''; tsState = 'loading'; try { turnstile.reset(tsWidget); } catch(e){} }
     });
